@@ -22,6 +22,7 @@ dependencies:
   permission_handler: ^11.0.0
   get_storage: ^2.1.1
   connectivity_plus: ^4.0.2
+  intl_phone_field: ^3.2.0
 
 
 dev_dependencies:
@@ -40,18 +41,18 @@ flutter:
   fonts:
     - family: Bauhaus
       fonts:
-        - asset: fonts/Bauhaus.ttf
+        - asset: assets/fonts/Bauhaus.ttf
           style: italic
     - family: Inder
       fonts:
-        - asset: fonts/Inder.ttf
+        - asset: assets/fonts/Inder.ttf
           weight: 700
     - family: Inter
       fonts:
-        - asset: fonts/Inter.ttf
+        - asset: assets/fonts/Inter.ttf
           weight: 700
     - family: Righteous
       fonts:
-        - asset: fonts/Righteous.ttf
+        - asset: assets/fonts/Righteous.ttf
           weight: 700  
 

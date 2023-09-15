@@ -18,7 +18,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     Timer(const Duration(seconds: 3), () {
-      Get.toNamed("/onboarding");
+      Get.offNamed("/onboarding");
     });
   }
 

@@ -1,6 +1,6 @@
 class AppFonts {
-  static const primaryFont = 'Inter';
-  static const secondaryFont = 'Bauhaus';
-  static const paraGraPh = 'Inder';
-  static const subTitleGraPh = 'Righteous';
+  static const Inter = 'Inter';
+  static const Bauhaus = 'Bauhaus';
+  static const Inder = 'Inder';
+  static const Righteous = 'Righteous';
 }

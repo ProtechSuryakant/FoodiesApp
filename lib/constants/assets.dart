@@ -18,4 +18,16 @@ class AppAssets {
   static const fingerchips1 = 'assets/png/fingerchips1.png';
   static const fingerchips2 = 'assets/png/fingerchips2.png';
   static const seak1 = 'assets/png/seak1.png';
+  static const burger4 = 'assets/png/burger4.png';
+  static const foods3 = 'assets/png/foods3.png';
+  static const loginbg = 'assets/images/loginbg2.jpg';
+  static const loginbg3 = 'assets/images/loginbg3.jpg';
+
+  static const burger3 = 'assets/png/burger3.png';
+  static const pizza_ai1 = 'assets/png/pizza_ai1.png';
+  static const loginBurger = 'assets/images/loginPhoto.jpg';
+  static const google = 'assets/png/google.png';
+  static const facebook = 'assets/png/facebook.png';
+  static const tweeter = 'assets/png/tweeter.png';
+  static const tweeter2 = 'assets/png/tweeter2.png';
 }
