@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:foodies_app/app/routes/routes.dart';
 import 'package:foodies_app/constants/appFonts.dart';
 import 'package:foodies_app/constants/assets.dart';
 import 'package:foodies_app/constants/colors.dart';
@@ -97,7 +98,7 @@ class _OnBoardScreenState extends State<OnBoardScreen> {
                         curve: Curves.ease,
                       );
                       if (_pageIndex == 2) {
-                        Get.toNamed("/loginNumber");
+                        Get.toNamed(AppRoutes.loginNumber);
                       }
                     },
                     style: ElevatedButton.styleFrom(
@@ -114,7 +115,7 @@ class _OnBoardScreenState extends State<OnBoardScreen> {
                 ),
                 TextButton(
                   onPressed: () {
-                    Get.toNamed("/loginNumber");
+                    Get.toNamed(AppRoutes.loginNumber);
                   },
                   child: Text(
                     "Skip",

@@ -20,8 +20,10 @@ class AppAssets {
   static const seak1 = 'assets/png/seak1.png';
   static const burger4 = 'assets/png/burger4.png';
   static const foods3 = 'assets/png/foods3.png';
-  static const loginbg = 'assets/images/loginbg2.jpg';
+  static const loginbg2 = 'assets/images/loginbg2.jpg';
+  static const loginbg = 'assets/png/loginbg.png';
   static const loginbg3 = 'assets/images/loginbg3.jpg';
+  static const loginbg4 = 'assets/images/loginbg4.jpg';
 
   static const burger3 = 'assets/png/burger3.png';
   static const pizza_ai1 = 'assets/png/pizza_ai1.png';
@@ -30,4 +32,6 @@ class AppAssets {
   static const facebook = 'assets/png/facebook.png';
   static const tweeter = 'assets/png/tweeter.png';
   static const tweeter2 = 'assets/png/tweeter2.png';
+  static const pizza = 'assets/png/pizza3.png';
+  static const pizzafry = 'assets/png/pizza_fry.png';
 }

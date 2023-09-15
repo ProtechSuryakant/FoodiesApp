@@ -8,5 +8,5 @@ class FoodiesColors {
   static const Color backgroundColor = Color(0xFFFFE7DC);
   static const Color card = Color(0xFFF6F1E7);
   static const cardColor = Color(0xFFFFEFE9);
-  static const Color cardBackground = Color(0xFFFAD6C6);
+  static const Color cardBackground = Color(0xFFF9D2C0);
 }

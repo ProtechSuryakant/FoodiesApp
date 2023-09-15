@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:foodies_app/app/routes/routes.dart';
 import 'package:foodies_app/constants/appFonts.dart';
 import 'package:foodies_app/constants/appMessages.dart';
 import 'package:foodies_app/constants/assets.dart';
@@ -37,13 +38,14 @@ class _LoginWithNumberState extends State<LoginWithNumber> {
             height: h,
             decoration: const BoxDecoration(
                 image: DecorationImage(
-                    image: AssetImage(AppAssets.loginbg3), fit: BoxFit.cover)),
+                    image: AssetImage(AppAssets.loginbg4), fit: BoxFit.cover)),
             child: SingleChildScrollView(
               child: Column(
                 children: [
                   Container(
-                    margin: const EdgeInsets.only(left: 185, top: 50),
-                    height: h * 0.2.h,
+                    alignment: Alignment.center,
+                    margin: const EdgeInsets.only(left: 185, top: 100),
+                    height: h * 0.12.h,
                     width: w,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
@@ -86,7 +88,7 @@ class _LoginWithNumberState extends State<LoginWithNumber> {
                     ),
                   ),
                   SizedBox(
-                    height: 30.h,
+                    height: 50.h,
                   ),
                   Container(
                     margin: const EdgeInsets.all(20),
@@ -150,7 +152,7 @@ class _LoginWithNumberState extends State<LoginWithNumber> {
                         AwesomeDialog(
                                 context: context,
                                 animType: AnimType.topSlide,
-                                dialogType: DialogType.info,
+                                dialogType: DialogType.success,
                                 title: MsgTitle.Success,
                                 desc: AppMessages.success,
                                 descTextStyle: const TextStyle(
@@ -158,7 +160,7 @@ class _LoginWithNumberState extends State<LoginWithNumber> {
                                 isDense: false,
                                 btnOkText: 'OK',
                                 btnOkOnPress: () {
-                                  Get.obs();
+                                  Get.toNamed(AppRoutes.otpVerification);
                                 },
                                 btnOkColor: FoodiesColors.accentColor)
                             .show();
@@ -211,7 +213,8 @@ class _LoginWithNumberState extends State<LoginWithNumber> {
                     ]),
                   ),
                   Container(
-                    margin: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                    margin: const EdgeInsets.symmetric(
+                        horizontal: 20, vertical: 35),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [

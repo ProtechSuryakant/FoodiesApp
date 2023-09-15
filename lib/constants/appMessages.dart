@@ -6,4 +6,5 @@ class AppMessages {
   static const mobileNumberInfo = 'Please enter mobile number';
   static const mobileNumberLength = 'Please enter valid number.';
   static const success = 'OTP sent on your mobile number.';
+  static const otpLoginValidation = 'Please enter valid otp.';
 }

@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:foodies_app/app/routes/routes.dart';
 import 'package:foodies_app/constants/assets.dart';
 import 'package:get/get.dart';
 
@@ -18,7 +19,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     Timer(const Duration(seconds: 3), () {
-      Get.offNamed("/onboarding");
+      Get.offNamed(AppRoutes.onBoarding);
     });
   }
 
