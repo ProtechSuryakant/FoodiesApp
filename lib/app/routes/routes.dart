@@ -7,7 +7,8 @@ class AppRoutes {
   static const forgotPass = '/forgotPass';
   static const forgotOtp = '/forgotOtp';
   static const changePass = '/changePass';
-  static const homeMain = '/homeMain';
+  static const home = '/home';
+  static const homeMain = '/homemain';
   static const profile = '/profile';
   static const settings = '/settings';
 }

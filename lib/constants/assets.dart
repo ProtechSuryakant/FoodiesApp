@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 class AppAssets {
   static const logo = 'assets/png/logo.png';
   static const splashBg = 'assets/png/splash_bg_2.png';
@@ -34,4 +36,14 @@ class AppAssets {
   static const tweeter2 = 'assets/png/tweeter2.png';
   static const pizza = 'assets/png/pizza3.png';
   static const pizzafry = 'assets/png/pizza_fry.png';
+  static const table_book_icon = 'assets/png/table_book.png';
+  static const user = 'assets/png/profile.png';
+  static const down_arrow = 'assets/png/down_arrow.png';
+  static const banner1 = 'assets/images/banner1.png';
+  static const banner2 = 'assets/images/banner2.png';
+  static const banner3 = 'assets/images/banner3.png';
+  static const offer1 = 'assets/png/offer1.png';
+  static const offer2 = 'assets/png/offer2.png';
+  static const offer3 = 'assets/png/offer3.jpg';
+  static const offer4 = 'assets/png/offer4.png';
 }

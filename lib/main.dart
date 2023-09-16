@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:foodies_app/app/routes/routes.dart';
 import 'package:foodies_app/app/theme/themes.dart';
 import 'package:foodies_app/controllers/dependencyInjection.dart';
-import 'package:foodies_app/controllers/themeControllers.dart';
 import 'package:foodies_app/pages/onboardScreen.dart';
 import 'package:foodies_app/pages/splashScreeen.dart';
 import 'package:foodies_app/pages/unknownScreen.dart';
@@ -12,10 +11,10 @@ import 'package:foodies_app/screens/auth/forgotOtp.dart';
 import 'package:foodies_app/screens/auth/login_with_number.dart';
 import 'package:foodies_app/screens/auth/otpVerification.dart';
 import 'package:foodies_app/screens/auth/signUp.dart';
-import 'package:foodies_app/screens/mainHome/MainHome.dart';
+import 'package:foodies_app/screens/mainHome/home/Home.dart';
+import 'package:foodies_app/screens/mainHome/mainHome.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:shimmer/main.dart';
 
 void main() {
   runApp(const MyApp());
@@ -50,8 +49,10 @@ class MyApp extends StatelessWidget {
               name: AppRoutes.loginNumber,
               page: () => const LoginWithNumber(),
             ),
+            GetPage(name: AppRoutes.home, page: () => const Home()),
             GetPage(
-                name: AppRoutes.otpVerification, page: () => OTPVerification()),
+                name: AppRoutes.otpVerification,
+                page: () => const OTPVerification()),
             GetPage(
               name: AppRoutes.forgotPass,
               page: () => const ForgotPassword(),
@@ -70,7 +71,7 @@ class MyApp extends StatelessWidget {
             ),
             GetPage(
               name: AppRoutes.homeMain,
-              page: () => MainHome(),
+              page: () => const MainHome(),
             )
           ],
           unknownRoute: GetPage(

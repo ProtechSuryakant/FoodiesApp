@@ -30,39 +30,19 @@ class _SplashScreenState extends State<SplashScreen> {
     ));
 
     return Scaffold(
-      body: Stack(
-        children: [
-          Positioned(
-            left: 0.w,
-            right: 0.w,
-            top: 0.h,
-            bottom: 0.h,
-            child: Container(
-              alignment: Alignment.center,
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height,
-              decoration: const BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage(AppAssets.splashBg),
-                      fit: BoxFit.cover,
-                      opacity: 0.2)),
-              child: Container(
-                height: 80.h,
-                width: 250.w,
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.7),
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: Image.asset(
-                  AppAssets.logo,
-                  fit: BoxFit.contain,
-                ),
-              ),
-            ),
+      body: Container(
+        alignment: Alignment.center,
+        height: double.infinity,
+        width: double.infinity,
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+        child: SizedBox(
+          height: 150,
+          width: 200,
+          child: Image.asset(
+            AppAssets.logo,
+            fit: BoxFit.contain,
           ),
-        ],
+        ),
       ),
     );
   }
