@@ -20,6 +20,7 @@ class AppAssets {
   static const fingerchips1 = 'assets/png/fingerchips1.png';
   static const fingerchips2 = 'assets/png/fingerchips2.png';
   static const seak1 = 'assets/png/seak1.png';
+
   static const burger4 = 'assets/png/burger4.png';
   static const foods3 = 'assets/png/foods3.png';
   static const loginbg2 = 'assets/images/loginbg2.jpg';
@@ -46,4 +47,6 @@ class AppAssets {
   static const offer2 = 'assets/png/offer2.png';
   static const offer3 = 'assets/png/offer3.jpg';
   static const offer4 = 'assets/png/offer4.png';
+  static const sushi1 = 'assets/png/sushi_ai.png';
+  static const popcorn = 'assets/png/popcorn_ai.png';
 }

@@ -30,7 +30,6 @@ class _LoginWithNumberState extends State<LoginWithNumber> {
       resizeToAvoidBottomInset: true,
       body: LayoutBuilder(
         builder: (context, constraints) {
-          // Get screen dimensions
           double w = constraints.maxWidth;
           double h = constraints.maxHeight;
 
@@ -52,7 +51,7 @@ class _LoginWithNumberState extends State<LoginWithNumber> {
                         Container(
                           alignment: Alignment.centerLeft,
                           margin:
-                              EdgeInsets.only(left: w * 0.8.h, top: h * 0.04),
+                              EdgeInsets.only(left: w * 0.75.h, top: h * 0.04),
                           child: TextButton(
                             onPressed: () {
                               Get.toNamed(AppRoutes.homeMain);

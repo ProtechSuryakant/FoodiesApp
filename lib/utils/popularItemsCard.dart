@@ -6,15 +6,30 @@ import 'package:foodies_app/constants/assets.dart';
 import 'package:foodies_app/constants/colors.dart';
 
 class PopularItemCard extends StatelessWidget {
-  const PopularItemCard({super.key});
+  final IconData favIcon;
+  final IconData ratIcon;
+  final double itemRating;
+  final double itemPrice;
+  final String image;
+  final String itemTitle;
+  final String itemDetails;
+  const PopularItemCard(
+      {super.key,
+      required this.favIcon,
+      required this.ratIcon,
+      required this.image,
+      required this.itemTitle,
+      required this.itemDetails,
+      required this.itemRating,
+      required this.itemPrice});
 
   @override
   Widget build(BuildContext context) {
     double w = MediaQuery.of(context).size.width;
     double h = MediaQuery.of(context).size.height;
     return Container(
-      height: h * 0.35,
-      width: w * 0.55,
+      height: h * 0.35.h,
+      width: w * 0.55.h,
       margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
       decoration: BoxDecoration(
           color: FoodiesColors.cardColor,
@@ -31,9 +46,7 @@ class PopularItemCard extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              IconButton(
-                  onPressed: () {},
-                  icon: const Icon(Icons.favorite_border_outlined)),
+              IconButton(onPressed: () {}, icon: Icon(favIcon)),
               Container(
                 alignment: Alignment.center,
                 margin: const EdgeInsets.only(right: 10),
@@ -42,15 +55,15 @@ class PopularItemCard extends StatelessWidget {
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(50),
                 ),
-                child: const Row(
+                child: Row(
                   children: [
                     Icon(
-                      Icons.star,
+                      ratIcon,
                       size: 20,
                       color: Colors.yellow,
                     ),
                     Text(
-                      "4.4",
+                      itemRating.toString(),
                       style: AppTextStyles.paragraphStyle,
                     )
                   ],
@@ -59,7 +72,7 @@ class PopularItemCard extends StatelessWidget {
             ],
           ),
           Container(
-            height: h * 0.13,
+            height: h * 0.13.h,
             decoration: const BoxDecoration(
                 image: DecorationImage(
                     image: AssetImage(AppAssets.pizza_ai1),
@@ -68,9 +81,9 @@ class PopularItemCard extends StatelessWidget {
           Container(
             margin: const EdgeInsets.symmetric(vertical: 5),
             alignment: Alignment.center,
-            child: const Text(
-              "Chicken Sandwich",
-              style: TextStyle(
+            child: Text(
+              itemTitle,
+              style: const TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
                 fontFamily: 'Inder',
@@ -80,24 +93,25 @@ class PopularItemCard extends StatelessWidget {
           ),
           Container(
             alignment: Alignment.center,
-            child: const Text(
-              overflow: TextOverflow.visible,
-              textAlign: TextAlign.center,
-              "There are many variations of"
-              "passage of available, but the"
-              "majority have suffer",
-              style: AppTextStyles.paragraphStyle,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                overflow: TextOverflow.visible,
+                textAlign: TextAlign.center,
+                itemDetails,
+                style: AppTextStyles.paragraphStyle,
+              ),
             ),
           ),
           Container(
             margin: const EdgeInsets.only(top: 5),
             alignment: Alignment.center,
-            child: const Text(
+            child: Text(
               overflow: TextOverflow.visible,
               textAlign: TextAlign.center,
-              "₹ 126.00",
+              "₹ $itemPrice",
               style: TextStyle(
-                fontSize: 16,
+                fontSize: 16.h,
                 fontWeight: FontWeight.bold,
                 fontFamily: 'Inder',
                 color: FoodiesColors.accentColor,
