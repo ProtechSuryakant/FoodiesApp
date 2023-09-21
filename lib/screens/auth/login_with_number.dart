@@ -125,7 +125,7 @@ class _LoginWithNumberState extends State<LoginWithNumber> {
                               FilteringTextInputFormatter.digitsOnly
                             ],
                             decoration: InputDecoration(
-                              border: OutlineInputBorder(
+                              border: const OutlineInputBorder(
                                 borderSide:
                                     BorderSide(color: FoodiesColors.textColor),
                               ),
@@ -134,13 +134,13 @@ class _LoginWithNumberState extends State<LoginWithNumber> {
                               labelStyle: TextStyle(
                                 color: Colors.black.withOpacity(0.7),
                               ),
-                              enabledBorder: OutlineInputBorder(
+                              enabledBorder: const OutlineInputBorder(
                                 borderSide: BorderSide(
                                   width: 1,
                                   color: FoodiesColors.textColor,
                                 ),
                               ),
-                              focusedBorder: OutlineInputBorder(
+                              focusedBorder: const OutlineInputBorder(
                                 borderSide: BorderSide(
                                   width: 1,
                                   color: FoodiesColors.textColor,
@@ -153,52 +153,35 @@ class _LoginWithNumberState extends State<LoginWithNumber> {
                           onTap: () {
                             if (_mobileNumber.text.isEmpty) {
                               AwesomeDialog(
-                                      context: context,
-                                      animType: AnimType.topSlide,
-                                      dialogType: DialogType.info,
-                                      title: MsgTitle.Info,
-                                      desc: AppMessages.mobileNumberInfo,
-                                      descTextStyle: const TextStyle(
-                                          fontSize: FontSize.smallBodyText),
-                                      isDense: false,
-                                      btnOkText: 'OK',
-                                      btnOkOnPress: () {
-                                        Get.obs();
-                                      },
-                                      btnOkColor: FoodiesColors.accentColor)
-                                  .show();
+                                context: context,
+                                animType: AnimType.topSlide,
+                                dialogType: DialogType.info,
+                                title: MsgTitle.Info,
+                                desc: AppMessages.mobileNumberInfo,
+                                descTextStyle: const TextStyle(
+                                    fontSize: FontSize.smallBodyText),
+                              ).show();
                             } else if (_mobileNumber.text.length < 10) {
                               AwesomeDialog(
-                                      context: context,
-                                      animType: AnimType.topSlide,
-                                      dialogType: DialogType.info,
-                                      title: MsgTitle.Info,
-                                      desc: AppMessages.mobileNumberLength,
-                                      descTextStyle: const TextStyle(
-                                          fontSize: FontSize.smallBodyText),
-                                      isDense: false,
-                                      btnOkText: 'OK',
-                                      btnOkOnPress: () {
-                                        Get.obs();
-                                      },
-                                      btnOkColor: FoodiesColors.accentColor)
-                                  .show();
+                                context: context,
+                                animType: AnimType.topSlide,
+                                dialogType: DialogType.info,
+                                title: MsgTitle.Info,
+                                desc: AppMessages.mobileNumberLength,
+                                descTextStyle: const TextStyle(
+                                    fontSize: FontSize.smallBodyText),
+                              ).show();
                             } else {
                               AwesomeDialog(
-                                      context: context,
-                                      animType: AnimType.topSlide,
-                                      dialogType: DialogType.success,
-                                      title: MsgTitle.Success,
-                                      desc: AppMessages.success,
-                                      descTextStyle: const TextStyle(
-                                          fontSize: FontSize.smallBodyText),
-                                      isDense: false,
-                                      btnOkText: 'OK',
-                                      btnOkOnPress: () {
-                                        Get.toNamed(AppRoutes.homeMain);
-                                      },
-                                      btnOkColor: FoodiesColors.accentColor)
-                                  .show();
+                                context: context,
+                                animType: AnimType.topSlide,
+                                dialogType: DialogType.success,
+                                title: MsgTitle.Success,
+                                desc: AppMessages.success,
+                                descTextStyle: const TextStyle(
+                                    fontSize: FontSize.smallBodyText),
+                              ).show();
+                              Get.offNamed(AppRoutes.otpVerification);
                             }
                           },
                           child: Container(

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:foodies_app/constants/appTextStyles.dart';
-import 'package:foodies_app/constants/assets.dart';
 import 'package:foodies_app/constants/colors.dart';
-import 'package:foodies_app/utils/categoryCard.dart';
+import 'package:foodies_app/utils/_showPriceBottomsheet.dart';
 import 'package:foodies_app/utils/categoryCard2.dart';
 import 'package:get/get.dart';
 
@@ -21,6 +20,7 @@ class _CategoryListState extends State<CategoryList2> {
   bool isDeliveryTimeLowToHigh = false;
   bool costLH = false;
   bool costHL = false;
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
@@ -368,11 +368,24 @@ class _CategoryListState extends State<CategoryList2> {
               ),
             );
           } else {
-            return const Padding(
-              padding: EdgeInsets.all(5.0),
-              child: CategoryCard2(
-                prefixIcon: Icons.money_sharp,
-                title: 'Filter By Price',
+            return Padding(
+              padding: const EdgeInsets.all(5.0),
+              child: InkWell(
+                onTap: () {
+                  showBottomSheet(
+                      enableDrag: false,
+                      backgroundColor: Colors.transparent,
+                      context: context,
+                      builder: ((context) {
+                        return ShowPriceBottomSheet(
+                          key: _scaffoldKey,
+                        );
+                      }));
+                },
+                child: const CategoryCard2(
+                  prefixIcon: Icons.money_sharp,
+                  title: 'Filter By Price',
+                ),
               ),
             );
           }

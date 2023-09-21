@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:foodies_app/app/routes/routes.dart';
 import 'package:foodies_app/app/theme/themes.dart';
 import 'package:foodies_app/controllers/dependencyInjection.dart';
+
+import 'package:foodies_app/pages/foodDetails.dart';
+import 'package:foodies_app/pages/menuPage.dart';
 import 'package:foodies_app/pages/onboardScreen.dart';
 import 'package:foodies_app/pages/splashScreeen.dart';
 import 'package:foodies_app/pages/unknownScreen.dart';
@@ -51,6 +54,10 @@ class MyApp extends StatelessWidget {
             ),
             GetPage(name: AppRoutes.home, page: () => const Home()),
             GetPage(
+              name: AppRoutes.menuPage,
+              page: () => const MenuPage(),
+            ),
+            GetPage(
                 name: AppRoutes.otpVerification,
                 page: () => const OTPVerification()),
             GetPage(
@@ -72,7 +79,11 @@ class MyApp extends StatelessWidget {
             GetPage(
               name: AppRoutes.homeMain,
               page: () => const MainHome(),
-            )
+            ),
+            GetPage(
+              name: AppRoutes.foodDetails,
+              page: () => const FoodDetails(),
+            ),
           ],
           unknownRoute: GetPage(
             name: "/unknown",

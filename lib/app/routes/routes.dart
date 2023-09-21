@@ -9,6 +9,8 @@ class AppRoutes {
   static const changePass = '/changePass';
   static const home = '/home';
   static const homeMain = '/homemain';
+  static const menuPage = '/menuPage';
   static const profile = '/profile';
   static const settings = '/settings';
+  static const foodDetails = '/foodDetails';
 }

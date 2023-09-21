@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:foodies_app/constants/assets.dart';
 import 'package:foodies_app/constants/colors.dart';
+import 'package:foodies_app/data/models/categoryDataModal.dart';
 import 'package:foodies_app/utils/categoryCard.dart';
 
 class CategoryList extends StatefulWidget {
@@ -20,7 +21,7 @@ class _CategoryListState extends State<CategoryList> {
       width: w,
       child: GridView.builder(
         scrollDirection: Axis.horizontal,
-        itemCount: 20,
+        itemCount: categoryData.length,
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
             crossAxisSpacing: 1,
@@ -28,8 +29,9 @@ class _CategoryListState extends State<CategoryList> {
             mainAxisExtent: 80),
         shrinkWrap: true,
         itemBuilder: (BuildContext context, int index) {
-          return const CategoryCard(
-              image: AppAssets.burger3, catTitle: "Burger");
+          return CategoryCard(
+              image: categoryData[index].image,
+              catTitle: categoryData[index].categoryTitle);
         },
       ),
     );

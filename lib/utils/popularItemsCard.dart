@@ -4,16 +4,21 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:foodies_app/constants/appTextStyles.dart';
 import 'package:foodies_app/constants/assets.dart';
 import 'package:foodies_app/constants/colors.dart';
+import 'package:foodies_app/controllers/favController.dart';
+import 'package:get/get.dart';
 
 class PopularItemCard extends StatelessWidget {
   final IconData favIcon;
+  final IconData disLike;
+  final int index;
   final IconData ratIcon;
   final double itemRating;
   final double itemPrice;
   final String image;
   final String itemTitle;
   final String itemDetails;
-  const PopularItemCard(
+  final String tag;
+  PopularItemCard(
       {super.key,
       required this.favIcon,
       required this.ratIcon,
@@ -21,7 +26,12 @@ class PopularItemCard extends StatelessWidget {
       required this.itemTitle,
       required this.itemDetails,
       required this.itemRating,
-      required this.itemPrice});
+      required this.itemPrice,
+      required this.tag,
+      required this.disLike,
+      required this.index});
+
+  final FavoriteController favoriteController = Get.put(FavoriteController());
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +56,22 @@ class PopularItemCard extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              IconButton(onPressed: () {}, icon: Icon(favIcon)),
+              Obx(() => IconButton(
+                  onPressed: () {
+                    if (favoriteController.isFavorite(index) == true) {
+                      favoriteController.toggleRemoveFavorite(index);
+                    } else {
+                      favoriteController.toggleAddFavorite(index);
+                    }
+                  },
+                  icon: favoriteController.isFavorite(index)
+                      ? Icon(
+                          favIcon,
+                          color: FoodiesColors.accentColor,
+                        )
+                      : Icon(
+                          disLike,
+                        ))),
               Container(
                 alignment: Alignment.center,
                 margin: const EdgeInsets.only(right: 10),
@@ -73,10 +98,14 @@ class PopularItemCard extends StatelessWidget {
           ),
           Container(
             height: h * 0.13.h,
-            decoration: const BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage(AppAssets.pizza_ai1),
-                    fit: BoxFit.contain)),
+            decoration: const BoxDecoration(),
+            child: Hero(
+              tag: tag,
+              child: Image.asset(
+                AppAssets.pizza_ai1,
+                fit: BoxFit.contain,
+              ),
+            ),
           ),
           Container(
             margin: const EdgeInsets.symmetric(vertical: 5),

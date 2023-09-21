@@ -29,7 +29,11 @@ class AppAssets {
   static const loginbg4 = 'assets/images/loginbg4.jpg';
 
   static const burger3 = 'assets/png/burger3.png';
+  static const burger2 = 'assets/png/burger_2.png';
+
   static const pizza_ai1 = 'assets/png/pizza_ai1.png';
+  static const pizza_1 = 'assets/png/pizza_1.png';
+
   static const loginBurger = 'assets/images/loginPhoto.jpg';
   static const google = 'assets/png/google.png';
   static const facebook = 'assets/png/facebook.png';
@@ -49,4 +53,20 @@ class AppAssets {
   static const offer4 = 'assets/png/offer4.png';
   static const sushi1 = 'assets/png/sushi_ai.png';
   static const popcorn = 'assets/png/popcorn_ai.png';
+  static const ramen_1 = 'assets/png/ramen_1.png';
+  static const fast_food = 'assets/png/fast_food.png';
+  static const soft_drink = 'assets/png/soda_prev.png';
+  static const sandwich = 'assets/png/sandwich.png';
+  static const muffins = 'assets/png/muffines.png';
+
+  static const tacos = 'assets/png/tacos.png';
+  static const coleslaw = 'assets/png/coleslaw.png';
+  static const dumplings = 'assets/png/dumplings.png';
+  static const nachos = 'assets/png/nachos.png';
+
+  static const sushi2 = 'assets/images/Nigiri_Sushi.jpg';
+  static const sushi3 = 'assets/images/Chirashizushi.jpg';
+  static const sushi4 = 'assets/images/California_Sushi.jpg';
+  static const sushi5 = 'assets/images/sashimi_combo.jpg';
+  static const sushi6 = 'assets/images/temakizushi.jpg';
 }
