@@ -5,6 +5,8 @@ import 'package:foodies_app/constants/appTextStyles.dart';
 import 'package:foodies_app/constants/colors.dart';
 import 'package:foodies_app/constants/fontSizes.dart';
 import 'package:foodies_app/screens/mainHome/home/Home.dart';
+import 'package:foodies_app/screens/mainHome/newsBlog/newsandblog.dart';
+import 'package:foodies_app/screens/mainHome/orderDetails/orderDetails.dart';
 import 'package:get/get.dart';
 
 class MainHome extends StatefulWidget {
@@ -17,16 +19,10 @@ class MainHome extends StatefulWidget {
 class _MainHomeState extends State<MainHome> {
   var _currentIndex = 0;
 
-  List<Widget> Pages = [
-    Home(),
-    Text("Order", style: AppTextStyles.bottomNavTextStyle),
-    Text("News & Blog", style: AppTextStyles.bottomNavTextStyle),
-  ];
+  List<Widget> Pages = [Home(), OrderDetails(), NewsAndBlog()];
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
-
     return Scaffold(
       body: Center(child: Pages[_currentIndex]),
       bottomNavigationBar: Container(

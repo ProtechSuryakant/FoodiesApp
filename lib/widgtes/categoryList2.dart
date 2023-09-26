@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:foodies_app/constants/appTextStyles.dart';
 import 'package:foodies_app/constants/colors.dart';
+import 'package:foodies_app/controllers/checkBoxController.dart';
 import 'package:foodies_app/utils/_showPriceBottomsheet.dart';
 import 'package:foodies_app/utils/categoryCard2.dart';
 import 'package:get/get.dart';
@@ -21,6 +22,8 @@ class _CategoryListState extends State<CategoryList2> {
   bool costLH = false;
   bool costHL = false;
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  final ShortCheckboxController checkboxController =
+      Get.put(ShortCheckboxController());
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +47,7 @@ class _CategoryListState extends State<CategoryList2> {
                       context: context,
                       backgroundColor: Colors.transparent,
                       builder: (BuildContext context) {
-                        return Container(
+                        return SizedBox(
                             // color: Colors.amber,
                             height: h * 0.75,
                             width: w,
@@ -126,17 +129,20 @@ class _CategoryListState extends State<CategoryList2> {
                                                     style: AppTextStyles
                                                         .titleStyle,
                                                   ),
-                                                  Radio(
-                                                      activeColor: FoodiesColors
-                                                          .accentColor,
-                                                      value: isRatingHL,
-                                                      groupValue: true,
-                                                      onChanged: (newValue) {
-                                                        setState(() {
-                                                          isRatingHL =
-                                                              !isRatingHL;
-                                                        });
-                                                      })
+                                                  Obx(() => Checkbox(
+                                                        checkColor:
+                                                            Colors.white,
+                                                        value:
+                                                            checkboxController
+                                                                .isRatingHL
+                                                                .value,
+                                                        onChanged:
+                                                            (bool? value) {
+                                                          checkboxController
+                                                              .toggleCheckbox(
+                                                                  'isRatingHL');
+                                                        },
+                                                      )),
                                                 ],
                                               ),
                                             ),
@@ -154,16 +160,19 @@ class _CategoryListState extends State<CategoryList2> {
                                                     style: AppTextStyles
                                                         .titleStyle,
                                                   ),
-                                                  Radio(
-                                                      activeColor: FoodiesColors
-                                                          .accentColor,
-                                                      value: isRating,
-                                                      groupValue: true,
-                                                      onChanged: (newValue) {
-                                                        setState(() {
-                                                          isRating == !isRating;
-                                                        });
-                                                      })
+                                                  Obx(() => Checkbox(
+                                                        checkColor:
+                                                            Colors.white,
+                                                        value:
+                                                            checkboxController
+                                                                .isRating.value,
+                                                        onChanged:
+                                                            (bool? value) {
+                                                          checkboxController
+                                                              .toggleCheckbox(
+                                                                  'isRating');
+                                                        },
+                                                      )),
                                                 ],
                                               ),
                                             ),
@@ -181,17 +190,19 @@ class _CategoryListState extends State<CategoryList2> {
                                                     style: AppTextStyles
                                                         .titleStyle,
                                                   ),
-                                                  Radio(
-                                                      activeColor: FoodiesColors
-                                                          .accentColor,
-                                                      value:
-                                                          isDeliveryTimeLowToHigh,
-                                                      groupValue: true,
-                                                      onChanged: (newValue) {
-                                                        setState(() {
-                                                          isRating == newValue;
-                                                        });
-                                                      })
+                                                  Obx(() => Checkbox(
+                                                        checkColor:
+                                                            Colors.white,
+                                                        value: checkboxController
+                                                            .isDeliveryTimeLowToHigh
+                                                            .value,
+                                                        onChanged:
+                                                            (bool? value) {
+                                                          checkboxController
+                                                              .toggleCheckbox(
+                                                                  'isDeliveryTimeLowToHigh');
+                                                        },
+                                                      )),
                                                 ],
                                               ),
                                             ),
@@ -209,17 +220,19 @@ class _CategoryListState extends State<CategoryList2> {
                                                     style: AppTextStyles
                                                         .titleStyle,
                                                   ),
-                                                  Radio(
-                                                      activeColor: FoodiesColors
-                                                          .accentColor,
-                                                      value:
-                                                          isDeliveryTimeHighToLow,
-                                                      groupValue: true,
-                                                      onChanged: (newValue) {
-                                                        setState(() {
-                                                          isRating == newValue;
-                                                        });
-                                                      })
+                                                  Obx(() => Checkbox(
+                                                        checkColor:
+                                                            Colors.white,
+                                                        value: checkboxController
+                                                            .isDeliveryTimeHighToLow
+                                                            .value,
+                                                        onChanged:
+                                                            (bool? value) {
+                                                          checkboxController
+                                                              .toggleCheckbox(
+                                                                  'isDeliveryTimeHighToLow');
+                                                        },
+                                                      )),
                                                 ],
                                               ),
                                             ),
@@ -237,16 +250,19 @@ class _CategoryListState extends State<CategoryList2> {
                                                     style: AppTextStyles
                                                         .titleStyle,
                                                   ),
-                                                  Radio(
-                                                      activeColor: FoodiesColors
-                                                          .accentColor,
-                                                      value: costLH,
-                                                      groupValue: true,
-                                                      onChanged: (newValue) {
-                                                        setState(() {
-                                                          isRating == newValue;
-                                                        });
-                                                      })
+                                                  Obx(() => Checkbox(
+                                                        checkColor:
+                                                            Colors.white,
+                                                        value:
+                                                            checkboxController
+                                                                .costLH.value,
+                                                        onChanged:
+                                                            (bool? value) {
+                                                          checkboxController
+                                                              .toggleCheckbox(
+                                                                  'costLH');
+                                                        },
+                                                      )),
                                                 ],
                                               ),
                                             ),
@@ -264,16 +280,19 @@ class _CategoryListState extends State<CategoryList2> {
                                                     style: AppTextStyles
                                                         .titleStyle,
                                                   ),
-                                                  Radio(
-                                                      activeColor: FoodiesColors
-                                                          .accentColor,
-                                                      value: costHL,
-                                                      groupValue: true,
-                                                      onChanged: (newValue) {
-                                                        setState(() {
-                                                          isRating == newValue;
-                                                        });
-                                                      })
+                                                  Obx(() => Checkbox(
+                                                        checkColor:
+                                                            Colors.white,
+                                                        value:
+                                                            checkboxController
+                                                                .costHL.value,
+                                                        onChanged:
+                                                            (bool? value) {
+                                                          checkboxController
+                                                              .toggleCheckbox(
+                                                                  'costHL');
+                                                        },
+                                                      )),
                                                 ],
                                               ),
                                             ),

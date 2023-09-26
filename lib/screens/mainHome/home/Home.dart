@@ -13,6 +13,9 @@ import 'package:foodies_app/widgtes/categoryList2.dart';
 import 'package:foodies_app/widgtes/menuCardLists.dart';
 import 'package:foodies_app/widgtes/poductsList.dart';
 import 'package:foodies_app/widgtes/popularItemList.dart';
+import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:intl/intl.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -99,17 +102,28 @@ class _HomeState extends State<Home> {
                     ),
                   ),
                   const Spacer(),
-                  CircleAvatar(
-                    backgroundColor: Colors.transparent,
-                    radius: 15,
-                    child: ClipOval(
-                      child: Image(
-                        image: const AssetImage(
-                          AppAssets.table_book_icon,
+                  InkWell(
+                    onTap: () {
+                      showBottomSheet(
+                        context: context,
+                        backgroundColor: Colors.transparent,
+                        builder: (context) {
+                          return bookYourTable();
+                        },
+                      );
+                    },
+                    child: CircleAvatar(
+                      backgroundColor: Colors.transparent,
+                      radius: 15,
+                      child: ClipOval(
+                        child: Image(
+                          image: const AssetImage(
+                            AppAssets.table_book_icon,
+                          ),
+                          fit: BoxFit.cover,
+                          height: ScreenUtil().setHeight(30),
+                          width: ScreenUtil().setHeight(30),
                         ),
-                        fit: BoxFit.cover,
-                        height: ScreenUtil().setHeight(30),
-                        width: ScreenUtil().setHeight(30),
                       ),
                     ),
                   ),
@@ -403,13 +417,228 @@ class _HomeState extends State<Home> {
       ),
     );
   }
+
+  Widget bookYourTable() {
+    double w = MediaQuery.of(context).size.width;
+    double h = MediaQuery.of(context).size.height;
+
+    String? _selectedValue;
+
+    List<Map> users = [
+      {'id': '1', 'icon': Icon(CupertinoIcons.person_2), 'people': "2 People"},
+      {'id': '2', 'icon': Icon(CupertinoIcons.person_3), 'people': "4 People"},
+      {'id': '3', 'icon': Icon(CupertinoIcons.person_3), 'people': "6 People"},
+      {'id': '4', 'icon': Icon(CupertinoIcons.person_3), 'people': "8 People"}
+    ];
+
+    DateTime selectedDate = DateTime.now();
+    String formattedTime = DateFormat('h:mm a').format(selectedDate);
+
+    void onDateChanged(DateTime date) {
+      setState(() {
+        selectedDate = date;
+      });
+    }
+
+    return Container(
+        color: Colors.transparent,
+        height: h * 0.6,
+        width: w,
+        child: Stack(
+          children: [
+            Positioned(
+              bottom: 0,
+              left: 0,
+              right: 0,
+              child: Column(
+                children: [
+                  CircleAvatar(
+                    backgroundColor: Colors.black.withOpacity(0.5),
+                    child: IconButton(
+                      onPressed: () {
+                        Get.back();
+                      },
+                      icon: const Icon(
+                        Icons.close,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10.h,
+                  ),
+                  Container(
+                    height: h * 0.5,
+                    width: w,
+                    decoration: BoxDecoration(
+                        color: FoodiesColors.cardBackground,
+                        borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(20),
+                            topRight: Radius.circular(20)),
+                        boxShadow: [
+                          BoxShadow(
+                              blurRadius: 0.5,
+                              spreadRadius: 0.5,
+                              color: Colors.black.withOpacity(0.3),
+                              offset: const Offset(0, -0.25))
+                        ]),
+                    child: Column(
+                      children: [
+                        Container(
+                          margin: const EdgeInsets.only(
+                              top: 20, left: 20, bottom: 10),
+                          child: const Center(
+                            child: Text(
+                              "Book Your Table",
+                              style: AppTextStyles.homeTitleStyle,
+                            ),
+                          ),
+                        ),
+                        const Divider(
+                          thickness: 1,
+                          indent: 10,
+                          endIndent: 10,
+                          color: FoodiesColors.accentColor,
+                        ),
+                        Container(
+                            width: w.w,
+                            margin: EdgeInsets.symmetric(horizontal: 30.r),
+                            color: FoodiesColors.cardColor,
+                            child: DropdownButtonHideUnderline(
+                              child: ButtonTheme(
+                                  buttonColor: FoodiesColors.cardColor,
+                                  alignedDropdown: true,
+                                  child: DropdownButton(
+                                    value: _selectedValue,
+                                    hint: Text("Select table"),
+                                    onChanged: (value) {
+                                      setState(() {
+                                        _selectedValue = value;
+                                      });
+                                    },
+                                    items: users.map((item) {
+                                      return DropdownMenuItem(
+                                          value: item['id'].toString(),
+                                          child: Row(
+                                            children: [
+                                              item['icon'],
+                                              Container(
+                                                margin:
+                                                    EdgeInsets.only(left: 10.r),
+                                                child: Text(item['people']),
+                                              )
+                                            ],
+                                          ));
+                                    }).toList(),
+                                  )),
+                            )),
+                        Container(
+                            margin: const EdgeInsets.symmetric(
+                                horizontal: 30, vertical: 10),
+                            padding: const EdgeInsets.only(left: 10),
+                            decoration: const BoxDecoration(
+                                color: FoodiesColors.cardColor),
+                            child: Row(
+                              children: [
+                                const Icon(
+                                  CupertinoIcons.calendar,
+                                  color: FoodiesColors.accentColor,
+                                ),
+                                SizedBox(
+                                  width: 10.h,
+                                ),
+                                Text(
+                                  selectedDate.toString(),
+                                  style: TextStyle(
+                                      color: FoodiesColors.textColor
+                                          .withOpacity(0.7),
+                                      fontSize: h * 0.020.h),
+                                ),
+                                const Spacer(),
+                                IconButton(
+                                    onPressed: () {
+                                      CalendarDatePicker(
+                                        initialDate: selectedDate,
+                                        firstDate: DateTime(2023, 1, 1),
+                                        lastDate: DateTime(2023, 12, 31),
+                                        onDateChanged: onDateChanged,
+                                      );
+                                    },
+                                    icon: Image(
+                                      image: const AssetImage(
+                                          AppAssets.down_arrow),
+                                      height: 10.h,
+                                      width: 10.w,
+                                    ))
+                              ],
+                            )),
+                        Container(
+                            margin: const EdgeInsets.symmetric(
+                              horizontal: 30,
+                            ),
+                            padding: const EdgeInsets.only(left: 10),
+                            decoration: const BoxDecoration(
+                                color: FoodiesColors.cardColor),
+                            child: Row(
+                              children: [
+                                const Icon(
+                                  CupertinoIcons.time,
+                                  color: FoodiesColors.accentColor,
+                                ),
+                                SizedBox(
+                                  width: 10.h,
+                                ),
+                                Text(
+                                  formattedTime,
+                                  style: TextStyle(
+                                      color: FoodiesColors.textColor
+                                          .withOpacity(0.7),
+                                      fontSize: h * 0.020.h),
+                                ),
+                                const Spacer(),
+                                IconButton(
+                                    onPressed: () {},
+                                    icon: Image(
+                                      image: const AssetImage(
+                                          AppAssets.down_arrow),
+                                      height: 10.h,
+                                      width: 10.w,
+                                    ))
+                              ],
+                            )),
+                        Container(
+                            alignment: Alignment.center,
+                            width: w.w,
+                            margin: const EdgeInsets.symmetric(
+                                horizontal: 30, vertical: 10),
+                            padding: const EdgeInsets.only(
+                                left: 10, top: 10, bottom: 10),
+                            decoration: const BoxDecoration(
+                                color: FoodiesColors.accentColor),
+                            child: Text(
+                              "Book",
+                              style: TextStyle(
+                                  fontFamily: 'Inter',
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: h * 0.022.sp,
+                                  color: Colors.white),
+                            ))
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            )
+          ],
+        ));
+  }
 }
 
 class MyPersistentHeaderDelegate extends SliverPersistentHeaderDelegate {
   @override
-  double get minExtent => 90.0;
+  double get minExtent => 90.0.h;
   @override
-  double get maxExtent => 90.0;
+  double get maxExtent => 90.0.h;
 
   @override
   Widget build(

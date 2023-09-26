@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:foodies_app/app/routes/routes.dart';
 import 'package:foodies_app/app/theme/themes.dart';
 import 'package:foodies_app/controllers/dependencyInjection.dart';
+import 'package:foodies_app/pages/checkOutPage.dart';
 
 import 'package:foodies_app/pages/foodDetails.dart';
 import 'package:foodies_app/pages/menuPage.dart';
@@ -16,6 +17,8 @@ import 'package:foodies_app/screens/auth/otpVerification.dart';
 import 'package:foodies_app/screens/auth/signUp.dart';
 import 'package:foodies_app/screens/mainHome/home/Home.dart';
 import 'package:foodies_app/screens/mainHome/mainHome.dart';
+import 'package:foodies_app/screens/mainHome/newsBlog/newsandblog.dart';
+import 'package:foodies_app/screens/mainHome/orderDetails/orderDetails.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -53,6 +56,16 @@ class MyApp extends StatelessWidget {
               page: () => const LoginWithNumber(),
             ),
             GetPage(name: AppRoutes.home, page: () => const Home()),
+            GetPage(
+                name: AppRoutes.orderDetails, page: () => const OrderDetails()),
+            GetPage(
+              name: AppRoutes.checkOutDetails,
+              page: () => const CheckOutPage(),
+            ),
+            GetPage(
+              name: AppRoutes.newsnadblog,
+              page: () => const NewsAndBlog(),
+            ),
             GetPage(
               name: AppRoutes.menuPage,
               page: () => const MenuPage(),

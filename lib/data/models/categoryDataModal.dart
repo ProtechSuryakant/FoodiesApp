@@ -8,11 +8,12 @@ class CategoryDataModals {
 }
 
 List<CategoryDataModals> categoryData = [
-  CategoryDataModals(image: AppAssets.burger2, categoryTitle: "Burger"),
-  CategoryDataModals(image: AppAssets.pizza_1, categoryTitle: "Pizza"),
-  CategoryDataModals(image: AppAssets.popcorn, categoryTitle: "French Fries"),
+  CategoryDataModals(image: AppAssets.burger_ai, categoryTitle: "Burger"),
+  CategoryDataModals(image: AppAssets.pizza, categoryTitle: "Pizza"),
+  CategoryDataModals(
+      image: AppAssets.fench_fries2, categoryTitle: "French Fries"),
   CategoryDataModals(image: AppAssets.eggroll, categoryTitle: "Rolls"),
-  CategoryDataModals(image: AppAssets.fast_food, categoryTitle: "Fast Food"),
+  CategoryDataModals(image: AppAssets.fast_food2, categoryTitle: "Fast Food"),
   CategoryDataModals(image: AppAssets.soft_drink, categoryTitle: "Soft Drink"),
   CategoryDataModals(image: AppAssets.sandwich, categoryTitle: "Sandwich"),
   CategoryDataModals(image: AppAssets.muffins, categoryTitle: "Muffins"),

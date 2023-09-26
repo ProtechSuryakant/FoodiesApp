@@ -91,6 +91,12 @@ class MenuCard extends StatelessWidget {
           SizedBox(
             width: 20.h,
           ),
+          // VerticalDivider(
+          //   indent: 20,
+          //   endIndent: 20,
+          //   color: Colors.grey.withOpacity(0.5),
+          //   thickness: 1,
+          // )
         ],
       ),
     );

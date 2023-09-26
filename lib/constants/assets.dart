@@ -69,4 +69,8 @@ class AppAssets {
   static const sushi4 = 'assets/images/California_Sushi.jpg';
   static const sushi5 = 'assets/images/sashimi_combo.jpg';
   static const sushi6 = 'assets/images/temakizushi.jpg';
+
+  static const burger_ai = 'assets/png/burder_ai2.png';
+  static const fench_fries2 = 'assets/png/french_fries2.png';
+  static const fast_food2 = 'assets/png/fast_food2.png';
 }

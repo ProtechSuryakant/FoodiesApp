@@ -21,13 +21,10 @@ class _CategoryListState extends State<CategoryList> {
       width: w,
       child: GridView.builder(
         scrollDirection: Axis.horizontal,
-        itemCount: categoryData.length,
+        itemCount: 8,
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            crossAxisSpacing: 1,
-            mainAxisSpacing: 0,
-            mainAxisExtent: 80),
-        shrinkWrap: true,
+            crossAxisCount: 2, mainAxisExtent: 100),
+        shrinkWrap: false,
         itemBuilder: (BuildContext context, int index) {
           return CategoryCard(
               image: categoryData[index].image,

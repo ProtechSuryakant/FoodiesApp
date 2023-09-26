@@ -1,19 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:foodies_app/app/routes/routes.dart';
 import 'package:foodies_app/constants/appTextStyles.dart';
-import 'package:foodies_app/constants/assets.dart';
 import 'package:foodies_app/constants/colors.dart';
+import 'package:foodies_app/controllers/favController.dart';
+import 'package:get/get.dart';
 
 class ProductCard extends StatelessWidget {
   final IconData favIcon;
+  final IconData disLike;
   final String productTitle;
   final String productDesc;
   final String image;
   final double price;
   final double rating;
   final CallbackAction? function;
-  const ProductCard(
+  final int index;
+  ProductCard(
       {super.key,
       required this.productTitle,
       required this.productDesc,
@@ -21,7 +25,11 @@ class ProductCard extends StatelessWidget {
       required this.price,
       required this.rating,
       this.function,
-      required this.favIcon});
+      required this.favIcon,
+      required this.disLike,
+      required this.index});
+
+  final FavoriteController favoriteController = Get.put(FavoriteController());
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +37,6 @@ class ProductCard extends StatelessWidget {
     double h = MediaQuery.of(context).size.height;
     return Container(
       width: w,
-      height: h * 0.6,
       padding: const EdgeInsets.all(15),
       decoration: BoxDecoration(
           color: FoodiesColors.cardColor,
@@ -39,7 +46,7 @@ class ProductCard extends StatelessWidget {
                 blurRadius: 0.2,
                 spreadRadius: 0.2,
                 color: Colors.black.withOpacity(0.3),
-                offset: Offset(0, 0.5))
+                offset: const Offset(0, 0.5))
           ]),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -47,10 +54,22 @@ class ProductCard extends StatelessWidget {
           Container(
             padding: const EdgeInsets.only(right: 10),
             alignment: Alignment.centerRight,
-            child: Icon(
-              favIcon,
-              size: 30,
-            ),
+            child: Obx(() => IconButton(
+                onPressed: () {
+                  if (favoriteController.isFavorite(index) == true) {
+                    favoriteController.toggleRemoveFavorite(index);
+                  } else {
+                    favoriteController.toggleAddFavorite(index);
+                  }
+                },
+                icon: favoriteController.isFavorite(index)
+                    ? Icon(
+                        favIcon,
+                        color: FoodiesColors.accentColor,
+                      )
+                    : Icon(
+                        disLike,
+                      ))),
           ),
           Container(
             alignment: Alignment.center,
@@ -110,7 +129,7 @@ class ProductCard extends StatelessWidget {
                 ),
                 GestureDetector(
                   onTap: () {
-                    function;
+                    Get.toNamed(AppRoutes.checkOutDetails);
                   },
                   child: Container(
                     padding: const EdgeInsets.only(

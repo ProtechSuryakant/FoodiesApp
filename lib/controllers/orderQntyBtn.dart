@@ -15,4 +15,19 @@ class OrderQtyBtn extends GetxController {
     }
     update();
   }
+
+  RxInt checkOutQty = 1.obs;
+
+  void qtyCheckoutIncrement(int item) {
+    checkOutQty++;
+
+    update();
+  }
+
+  void qtyCheckoutDecrement(int item) {
+    if (checkOutQty != 1) {
+      checkOutQty--;
+    }
+    update();
+  }
 }

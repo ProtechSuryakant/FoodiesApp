@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:foodies_app/app/routes/routes.dart';
 import 'package:foodies_app/constants/appTextStyles.dart';
 import 'package:foodies_app/constants/assets.dart';
 import 'package:foodies_app/constants/colors.dart';
+import 'package:foodies_app/data/models/menuModal.dart';
 import 'package:foodies_app/utils/menuCard.dart';
+import 'package:get/get.dart';
 
 class MenuCardList extends StatelessWidget {
   const MenuCardList({super.key});
@@ -27,54 +30,37 @@ class MenuCardList extends StatelessWidget {
                 color: Colors.black.withOpacity(0.3),
                 offset: const Offset(0, 0.5))
           ]),
-      child: ListView(
+      child: ListView.builder(
+        itemCount: menuList.length,
         scrollDirection: Axis.horizontal,
-        children: [
-          MenuCard(
-            image: AppAssets.sushi1,
-            categoryTitle: 'Tasty Sushi',
-            categoryDetails: "There are many variations of"
-                "passage of available, but the"
-                "majority have suffer",
-            function: () {
-              print("Clicked");
-            },
-          ),
-          const VerticalDivider(
-            width: 20,
-            thickness: 1,
-            indent: 20,
-            endIndent: 20,
-            color: Colors.grey,
-          ),
-          MenuCard(
-            image: AppAssets.popcorn,
-            categoryTitle: 'French fries',
-            categoryDetails: "There are many variations of"
-                "passage of available, but the"
-                "majority have suffer",
-            function: () {
-              print("Clicked");
-            },
-          ),
-          const VerticalDivider(
-            width: 20,
-            thickness: 1,
-            indent: 20,
-            endIndent: 20,
-            color: Colors.grey,
-          ),
-          MenuCard(
-            image: AppAssets.seak1,
-            categoryTitle: 'Hot Barbecue',
-            categoryDetails: "There are many variations of"
-                "passage of available, but the"
-                "majority have suffer",
-            function: () {
-              print("Clicked");
-            },
-          ),
-        ],
+        itemBuilder: (BuildContext context, int index) {
+          return Row(
+            children: [
+              MenuCard(
+                image: menuList[index].image,
+                categoryTitle: menuList[index].menuTitle,
+                categoryDetails: menuList[index].menuDesc,
+                function: () {
+                  Get.toNamed(
+                    AppRoutes.menuPage,
+                    arguments: {
+                      'menuTitle': menuList[index].menuTitle,
+                      'menuId': menuList[index].menuId,
+                    },
+                  );
+                  print(menuList[index].menuId);
+                },
+              ),
+              if (index < menuList.length - 1)
+                VerticalDivider(
+                  indent: 20,
+                  endIndent: 20,
+                  color: Colors.grey.withOpacity(0.5),
+                  thickness: 1,
+                )
+            ],
+          );
+        },
       ),
     );
   }
