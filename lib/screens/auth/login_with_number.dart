@@ -32,7 +32,6 @@ class _LoginWithNumberState extends State<LoginWithNumber> {
         builder: (context, constraints) {
           double w = constraints.maxWidth;
           double h = constraints.maxHeight;
-
           return SingleChildScrollView(
             child: Column(
               children: [

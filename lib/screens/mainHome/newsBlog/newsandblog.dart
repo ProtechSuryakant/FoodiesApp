@@ -1,7 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:foodies_app/constants/assets.dart';
 import 'package:foodies_app/constants/colors.dart';
+import 'package:foodies_app/data/models/newsBlogModal.dart';
+import 'package:foodies_app/utils/newsBlogCard.dart';
+import 'package:get/get.dart';
 
 class NewsAndBlog extends StatefulWidget {
   const NewsAndBlog({super.key});
@@ -35,18 +39,15 @@ class _NewsAndBlogState extends State<NewsAndBlog> {
           ),
           SliverList.builder(
             itemBuilder: (BuildContext context, int index) {
-              return Container(
-                margin: EdgeInsets.symmetric(horizontal: 10.r),
-                padding: EdgeInsets.symmetric(horizontal: 10.r, vertical: 10.r),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15.r),
-                ),
-                child: Column(
-                  children: [Container(), Container()],
-                ),
-              );
+              return NewsBlogCard(
+                  title: newsblogData[index].title,
+                  image: newsblogData[index].image,
+                  desc: newsblogData[index].desc,
+                  date: newsblogData[index].date,
+                  saveIcon: Icons.bookmark,
+                  unsaveIcon: Icons.bookmark_border);
             },
-            itemCount: 10,
+            itemCount: newsblogData.length,
           )
         ],
       ),

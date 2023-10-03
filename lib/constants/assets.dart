@@ -73,4 +73,5 @@ class AppAssets {
   static const burger_ai = 'assets/png/burder_ai2.png';
   static const fench_fries2 = 'assets/png/french_fries2.png';
   static const fast_food2 = 'assets/png/fast_food2.png';
+  static const profile_sample = 'assets/images/profile_sapmle.jpg';
 }

@@ -2,11 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:foodies_app/app/routes/routes.dart';
 import 'package:foodies_app/app/theme/themes.dart';
 import 'package:foodies_app/controllers/dependencyInjection.dart';
+import 'package:foodies_app/pages/aboutus.dart';
+import 'package:foodies_app/pages/addressbook..dart';
 import 'package:foodies_app/pages/checkOutPage.dart';
+import 'package:foodies_app/pages/feedback.dart';
 
 import 'package:foodies_app/pages/foodDetails.dart';
 import 'package:foodies_app/pages/menuPage.dart';
 import 'package:foodies_app/pages/onboardScreen.dart';
+import 'package:foodies_app/pages/profileEdit.dart';
 import 'package:foodies_app/pages/splashScreeen.dart';
 import 'package:foodies_app/pages/unknownScreen.dart';
 import 'package:foodies_app/screens/auth/changePassword.dart';
@@ -19,6 +23,7 @@ import 'package:foodies_app/screens/mainHome/home/Home.dart';
 import 'package:foodies_app/screens/mainHome/mainHome.dart';
 import 'package:foodies_app/screens/mainHome/newsBlog/newsandblog.dart';
 import 'package:foodies_app/screens/mainHome/orderDetails/orderDetails.dart';
+import 'package:foodies_app/screens/mainHome/profile/profile.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -65,6 +70,26 @@ class MyApp extends StatelessWidget {
             GetPage(
               name: AppRoutes.newsnadblog,
               page: () => const NewsAndBlog(),
+            ),
+            GetPage(
+              name: AppRoutes.profile,
+              page: () => const ProfileScreen(),
+            ),
+            GetPage(
+              name: AppRoutes.profileEdit,
+              page: () => const ProfileEdit(),
+            ),
+            GetPage(
+              name: AppRoutes.addressbook,
+              page: () => const AddressBook(),
+            ),
+            GetPage(
+              name: AppRoutes.feedback,
+              page: () => const FeedbackScreen(),
+            ),
+            GetPage(
+              name: AppRoutes.aboutus,
+              page: () => const AboutUs(),
             ),
             GetPage(
               name: AppRoutes.menuPage,

@@ -3,6 +3,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:foodies_app/app/routes/routes.dart';
 import 'package:foodies_app/constants/appTextStyles.dart';
 import 'package:foodies_app/constants/assets.dart';
 import 'package:foodies_app/constants/colors.dart';
@@ -130,17 +131,20 @@ class _HomeState extends State<Home> {
                   SizedBox(
                     width: ScreenUtil().setWidth(10),
                   ),
-                  CircleAvatar(
-                    backgroundColor: Colors.transparent,
-                    radius: 15,
-                    child: ClipOval(
-                      child: Image(
-                        image: const AssetImage(
-                          AppAssets.user,
+                  InkWell(
+                    onTap: () => Get.toNamed(AppRoutes.profile),
+                    child: CircleAvatar(
+                      backgroundColor: Colors.transparent,
+                      radius: 15,
+                      child: ClipOval(
+                        child: Image(
+                          image: const AssetImage(
+                            AppAssets.profile_sample,
+                          ),
+                          fit: BoxFit.cover,
+                          height: ScreenUtil().setHeight(30),
+                          width: ScreenUtil().setHeight(30),
                         ),
-                        fit: BoxFit.cover,
-                        height: ScreenUtil().setHeight(30),
-                        width: ScreenUtil().setHeight(30),
                       ),
                     ),
                   ),
@@ -422,9 +426,9 @@ class _HomeState extends State<Home> {
     double w = MediaQuery.of(context).size.width;
     double h = MediaQuery.of(context).size.height;
 
-    String? _selectedValue;
+    String? selectedValue;
 
-    List<Map> users = [
+    List<Map> users = const [
       {'id': '1', 'icon': Icon(CupertinoIcons.person_2), 'people': "2 People"},
       {'id': '2', 'icon': Icon(CupertinoIcons.person_3), 'people': "4 People"},
       {'id': '3', 'icon': Icon(CupertinoIcons.person_3), 'people': "6 People"},
@@ -432,11 +436,20 @@ class _HomeState extends State<Home> {
     ];
 
     DateTime selectedDate = DateTime.now();
-    String formattedTime = DateFormat('h:mm a').format(selectedDate);
+    String formattedTime = DateFormat('HH:mm:ss').format(selectedDate);
 
-    void onDateChanged(DateTime date) {
-      setState(() {
-        selectedDate = date;
+    void _showDatePicker() {
+      showDatePicker(
+        context: context,
+        initialDate: DateTime.now(),
+        firstDate: DateTime(2023),
+        lastDate: DateTime(2025),
+      ).then((value) {
+        setState(() {
+          if (value != null) {
+            selectedDate = value;
+          }
+        });
       });
     }
 
@@ -509,11 +522,11 @@ class _HomeState extends State<Home> {
                                   buttonColor: FoodiesColors.cardColor,
                                   alignedDropdown: true,
                                   child: DropdownButton(
-                                    value: _selectedValue,
-                                    hint: Text("Select table"),
+                                    value: selectedValue,
+                                    hint: const Text("Select table"),
                                     onChanged: (value) {
                                       setState(() {
-                                        _selectedValue = value;
+                                        selectedValue = value;
                                       });
                                     },
                                     items: users.map((item) {
@@ -557,12 +570,7 @@ class _HomeState extends State<Home> {
                                 const Spacer(),
                                 IconButton(
                                     onPressed: () {
-                                      CalendarDatePicker(
-                                        initialDate: selectedDate,
-                                        firstDate: DateTime(2023, 1, 1),
-                                        lastDate: DateTime(2023, 12, 31),
-                                        onDateChanged: onDateChanged,
-                                      );
+                                      _showDatePicker();
                                     },
                                     icon: Image(
                                       image: const AssetImage(

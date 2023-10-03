@@ -98,7 +98,7 @@ class _OnBoardScreenState extends State<OnBoardScreen> {
                         curve: Curves.ease,
                       );
                       if (_pageIndex == 2) {
-                        Get.toNamed(AppRoutes.loginNumber);
+                        Get.offNamed(AppRoutes.loginNumber);
                       }
                     },
                     style: ElevatedButton.styleFrom(
@@ -115,7 +115,7 @@ class _OnBoardScreenState extends State<OnBoardScreen> {
                 ),
                 TextButton(
                   onPressed: () {
-                    Get.toNamed(AppRoutes.loginNumber);
+                    Get.offNamed(AppRoutes.loginNumber);
                   },
                   child: Text(
                     "Skip",
