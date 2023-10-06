@@ -15,7 +15,8 @@ class PopularItemList extends StatefulWidget {
 class _PopularItemListState extends State<PopularItemList> {
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
+      padding: EdgeInsets.only(right: 10.r),
       height: MediaQuery.of(context).size.height * 0.40.h,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,

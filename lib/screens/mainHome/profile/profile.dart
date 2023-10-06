@@ -374,21 +374,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                   InkWell(
                     onTap: () {
-                      showBottomSheet(
-                        backgroundColor: Colors.transparent,
-                        context: context,
-                        builder: (context) {
-                          return Container(
-                            decoration: BoxDecoration(
-                                color: FoodiesColors.cardBackground,
-                                borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(
-                                      20,
-                                    ),
-                                    topRight: Radius.circular(20))),
-                          );
-                        },
-                      );
+                      Get.toNamed(AppRoutes.supportUs);
                     },
                     child: Container(
                       padding: EdgeInsets.symmetric(

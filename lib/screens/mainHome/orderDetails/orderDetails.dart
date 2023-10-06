@@ -21,45 +21,47 @@ class _OrderDetailsState extends State<OrderDetails> {
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;
     return Scaffold(
-      body: CustomScrollView(
-        slivers: [
-          SliverAppBar(
-            backgroundColor: FoodiesColors.cardBackground,
-            automaticallyImplyLeading: false,
-            pinned: true,
-            elevation: 0,
-            centerTitle: true,
-            title: Text(
-              "Order History",
-              style: TextStyle(
-                  color: FoodiesColors.textColor,
-                  fontSize: h * 0.028.sp,
-                  fontFamily: 'Inter',
-                  fontWeight: FontWeight.bold),
+      body: SafeArea(
+        child: CustomScrollView(
+          slivers: [
+            SliverAppBar(
+              backgroundColor: FoodiesColors.cardColor,
+              automaticallyImplyLeading: false,
+              pinned: false,
+              floating: true,
+              centerTitle: true,
+              title: Text(
+                "Order History",
+                style: TextStyle(
+                    color: FoodiesColors.textColor,
+                    fontSize: h * 0.025.sp,
+                    fontFamily: 'Inter',
+                    fontWeight: FontWeight.bold),
+              ),
             ),
-          ),
-          SliverPersistentHeader(
-            delegate: MyPersistentHeaderDelegate(),
-            pinned: true,
-          ),
-          SliverList.builder(
-            itemBuilder: (BuildContext context, int index) {
-              return const OrderHistoryCard(
-                  image: AppAssets.coleslaw,
-                  address: "Foodies 04, Raipur",
-                  status: "Status",
-                  btnColor: Colors.green,
-                  qty: 3,
-                  size: "Regular",
-                  date: "20 Sep, 2023 at 8:00PM",
-                  price: 199.0,
-                  rating: 4.5,
-                  title: "La pino de pizza",
-                  txtColor: Colors.white);
-            },
-            itemCount: 10,
-          )
-        ],
+            SliverPersistentHeader(
+              delegate: MyPersistentHeaderDelegate(),
+              pinned: true,
+            ),
+            SliverList.builder(
+              itemBuilder: (BuildContext context, int index) {
+                return const OrderHistoryCard(
+                    image: AppAssets.coleslaw,
+                    address: "Foodies 04, Raipur",
+                    status: "Status",
+                    btnColor: Colors.green,
+                    qty: 3,
+                    size: "Regular",
+                    date: "20 Sep, 2023 at 8:00PM",
+                    price: 199.0,
+                    rating: 4.5,
+                    title: "La pino de pizza",
+                    txtColor: Colors.white);
+              },
+              itemCount: 10,
+            )
+          ],
+        ),
       ),
     );
   }
@@ -67,20 +69,19 @@ class _OrderDetailsState extends State<OrderDetails> {
 
 class MyPersistentHeaderDelegate extends SliverPersistentHeaderDelegate {
   @override
-  double get minExtent => 90.0.h;
+  double get minExtent => 70.0.h;
   @override
-  double get maxExtent => 90.0.h;
+  double get maxExtent => 70.0.h;
 
   @override
   Widget build(
       BuildContext context, double shrinkOffset, bool overlapsContent) {
     return Container(
-        padding: const EdgeInsets.all(15),
+        padding: const EdgeInsets.all(10),
         color: FoodiesColors.cardBackground,
         alignment: Alignment.center,
         child: Container(
             alignment: Alignment.center,
-            margin: const EdgeInsets.only(top: 10),
             padding: const EdgeInsets.symmetric(horizontal: 15),
             decoration: BoxDecoration(
               color: FoodiesColors.card,

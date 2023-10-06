@@ -12,6 +12,7 @@ import 'package:foodies_app/pages/menuPage.dart';
 import 'package:foodies_app/pages/onboardScreen.dart';
 import 'package:foodies_app/pages/profileEdit.dart';
 import 'package:foodies_app/pages/splashScreeen.dart';
+import 'package:foodies_app/pages/support.dart';
 import 'package:foodies_app/pages/unknownScreen.dart';
 import 'package:foodies_app/screens/auth/changePassword.dart';
 import 'package:foodies_app/screens/auth/forgot.dart';
@@ -90,6 +91,10 @@ class MyApp extends StatelessWidget {
             GetPage(
               name: AppRoutes.aboutus,
               page: () => const AboutUs(),
+            ),
+            GetPage(
+              name: AppRoutes.supportUs,
+              page: () => SupportPage(),
             ),
             GetPage(
               name: AppRoutes.menuPage,

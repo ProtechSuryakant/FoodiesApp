@@ -17,7 +17,9 @@ class AppRoutes {
   static const profileEdit = '/profileEdit';
   static const addressbook = '/addressbook';
   static const aboutus = '/aboutus';
+
   static const feedback = '/feedback';
   static const settings = '/settings';
+  static const supportUs = '/supportus';
   static const foodDetails = '/foodDetails';
 }
