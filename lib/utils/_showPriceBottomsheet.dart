@@ -123,25 +123,25 @@ class _ShowPriceBottomSheetState extends State<ShowPriceBottomSheet> {
                                 onPressed: () {},
                                 child: Text(
                                   "Price $price1 - $price2",
-                                  style: const TextStyle(
+                                  style: TextStyle(
                                       fontFamily: 'Inter',
-                                      fontSize: 18,
+                                      fontSize: 16.sp,
                                       color: FoodiesColors.textColor,
                                       fontWeight: FontWeight.bold),
                                 )),
                             InkWell(
-                              onTap: () => print("Applied"),
+                              onTap: () => Get.back(),
                               child: Container(
                                 padding: const EdgeInsets.only(
                                     top: 10, left: 15, right: 15, bottom: 10),
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(15),
                                     color: FoodiesColors.accentColor),
-                                child: const Text(
+                                child: Text(
                                   "Filter",
                                   style: TextStyle(
                                       color: FoodiesColors.cardColor,
-                                      fontSize: 18,
+                                      fontSize: 16.sp,
                                       fontWeight: FontWeight.bold),
                                 ),
                               ),

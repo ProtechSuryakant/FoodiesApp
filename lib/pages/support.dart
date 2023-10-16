@@ -90,7 +90,7 @@ class _SupportPageState extends State<SupportPage> {
                       child: Text(
                         "Can contact call through via",
                         style: TextStyle(
-                          fontSize: 16.sp,
+                          fontSize: 14.sp,
                           fontWeight: FontWeight.w500,
                           fontFamily: "Inter",
                         ),
@@ -122,9 +122,9 @@ class _SupportPageState extends State<SupportPage> {
                             alignment: Alignment.centerLeft,
                             padding: EdgeInsets.only(left: 10.r),
                             child: Text(
-                              "Select language :",
+                              "Language :",
                               style: TextStyle(
-                                fontSize: 16.sp,
+                                fontSize: 14.sp,
                                 fontWeight: FontWeight.w500,
                                 fontFamily: "Inter",
                               ),
@@ -133,7 +133,7 @@ class _SupportPageState extends State<SupportPage> {
                         Text(
                           "English",
                           style: TextStyle(
-                            fontSize: 16.sp,
+                            fontSize: 14.sp,
                             fontWeight: FontWeight.w500,
                             fontFamily: "Inter",
                           ),
@@ -150,7 +150,7 @@ class _SupportPageState extends State<SupportPage> {
                         Text(
                           "Hindi",
                           style: TextStyle(
-                            fontSize: 16.sp,
+                            fontSize: 14.sp,
                             fontWeight: FontWeight.w500,
                             fontFamily: "Inter",
                           ),

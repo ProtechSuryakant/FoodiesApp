@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:foodies_app/app/routes/routes.dart';
 import 'package:foodies_app/constants/assets.dart';
+import 'package:foodies_app/main.dart';
 import 'package:get/get.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -15,12 +16,26 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  // late bool isLogged;
   @override
   void initState() {
     super.initState();
-    Timer(const Duration(seconds: 3), () {
-      Get.offNamed(AppRoutes.onBoarding);
-    });
+
+    if (box.read('isLogged') == null) {
+      box.write('isLogged', false);
+    }
+
+    if (box.read('isLogged') == true) {
+      Timer(Duration(seconds: 1), () {
+        Get.offNamed(AppRoutes.homeMain);
+        print(box.read('isLogged'));
+      });
+    } else {
+      Timer(Duration(seconds: 1), () {
+        Get.offNamed(AppRoutes.onBoarding);
+        print(box.read('isLogged'));
+      });
+    }
   }
 
   @override

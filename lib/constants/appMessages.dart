@@ -5,6 +5,6 @@ class AppMessages {
   static const networkError = 'Network error. Please check your connection.';
   static const mobileNumberInfo = 'Please enter mobile number';
   static const mobileNumberLength = 'Please enter valid number.';
-  static const success = 'OTP sent on your mobile number.';
+  static const success = 'Successful.';
   static const otpLoginValidation = 'Please enter valid otp.';
 }

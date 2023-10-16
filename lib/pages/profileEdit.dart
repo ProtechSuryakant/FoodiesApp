@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:foodies_app/constants/appTextStyles.dart';
 import 'package:foodies_app/constants/colors.dart';
+import 'package:foodies_app/controllers/datePickerController.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
@@ -29,22 +30,8 @@ class _ProfileEditState extends State<ProfileEdit> {
   }
 
   static DateTime selectedDate = DateTime.now();
-
-  String formattedDate = selectedDate.toString();
-  void _showDatepicker() {
-    showDatePicker(
-            context: context,
-            initialDate: DateTime.now(),
-            firstDate: DateTime(1999),
-            lastDate: DateTime(2025))
-        .then((value) {
-      setState(() {
-        selectedDate = value!;
-        formattedDate = DateFormat('d, MMM, y', 'en_US').format(selectedDate);
-        print(selectedDate);
-      });
-    });
-  }
+  final DatePickerController __datePickercontroller =
+      Get.put(DatePickerController());
 
   @override
   Widget build(BuildContext context) {
@@ -205,22 +192,25 @@ class _ProfileEditState extends State<ProfileEdit> {
             child: Row(
               children: [
                 Text(
-                  "DOP :",
+                  "DOB :",
                   style:
                       TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w400),
                 ),
                 SizedBox(
                   width: 20.w,
                 ),
-                Text(
-                  formattedDate.toString(),
-                  style:
-                      TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w400),
+                Obx(
+                  () => Text(
+                    __datePickercontroller.formattedDate.value,
+                    style: TextStyle(
+                        color: FoodiesColors.textColor.withOpacity(0.7),
+                        fontSize: h * 0.020.h),
+                  ),
                 ),
                 const Spacer(),
                 IconButton(
                     onPressed: () {
-                      _showDatepicker();
+                      __datePickercontroller.showDatePicker();
                     },
                     icon: const Icon(
                       Icons.calendar_month,

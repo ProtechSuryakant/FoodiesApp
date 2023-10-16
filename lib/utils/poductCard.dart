@@ -4,7 +4,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:foodies_app/app/routes/routes.dart';
 import 'package:foodies_app/constants/appTextStyles.dart';
 import 'package:foodies_app/constants/colors.dart';
+import 'package:foodies_app/controllers/addProductOnListCart.dart';
 import 'package:foodies_app/controllers/favController.dart';
+import 'package:foodies_app/controllers/favoriteProductController.dart';
+import 'package:foodies_app/controllers/orderQntyBtn.dart';
 import 'package:get/get.dart';
 
 class ProductCard extends StatelessWidget {
@@ -29,18 +32,19 @@ class ProductCard extends StatelessWidget {
       required this.disLike,
       required this.index});
 
-  final FavoriteController favoriteController = Get.put(FavoriteController());
-
+  final FavoriteProductController favoriteController =
+      Get.put(FavoriteProductController());
+  final AddProductCart _addProductCart = Get.put(AddProductCart());
+  final OrderQtyBtn _orderQtyBtn = Get.put(OrderQtyBtn());
   @override
   Widget build(BuildContext context) {
     double w = MediaQuery.of(context).size.width;
     double h = MediaQuery.of(context).size.height;
     return Container(
-      width: w,
       padding: const EdgeInsets.all(15),
       decoration: BoxDecoration(
           color: FoodiesColors.cardColor,
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(10.r),
           boxShadow: [
             BoxShadow(
                 blurRadius: 0.2,
@@ -52,7 +56,7 @@ class ProductCard extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Container(
-            padding: const EdgeInsets.only(right: 10),
+            padding: EdgeInsets.only(right: 10.w),
             alignment: Alignment.centerRight,
             child: Obx(() => IconButton(
                 onPressed: () {
@@ -73,26 +77,33 @@ class ProductCard extends StatelessWidget {
           ),
           Container(
             alignment: Alignment.center,
-            height: h * 0.25,
-            width: w * 0.55,
-            decoration:
-                BoxDecoration(image: DecorationImage(image: AssetImage(image))),
+            height: h * 0.25.h,
+            width: w * 0.55.w,
+            decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage(image), fit: BoxFit.contain)),
           ),
           Container(
-            margin: const EdgeInsets.only(top: 10),
+            margin: EdgeInsets.only(top: 10.h),
             alignment: Alignment.center,
             child: Text(
               productTitle,
-              style: AppTextStyles.headingStyle,
+              style: TextStyle(
+                  fontSize: 18.sp,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: "Inter"),
             ),
           ),
           Container(
-            margin: const EdgeInsets.only(top: 10),
+            margin: EdgeInsets.only(top: 10.h),
             alignment: Alignment.center,
             child: Text(
               textAlign: TextAlign.justify,
               productDesc,
-              style: AppTextStyles.productDesc,
+              style: TextStyle(
+                  fontSize: 14.sp,
+                  fontWeight: FontWeight.w500,
+                  fontFamily: "Inder"),
             ),
           ),
           Container(
@@ -103,7 +114,7 @@ class ProductCard extends StatelessWidget {
                 Text(
                   "₹ $price",
                   style: TextStyle(
-                    fontSize: 16.h,
+                    fontSize: 14.sp,
                     fontWeight: FontWeight.bold,
                     fontFamily: 'Inder',
                     color: FoodiesColors.accentColor,
@@ -127,23 +138,149 @@ class ProductCard extends StatelessWidget {
                     },
                   ),
                 ),
-                GestureDetector(
-                  onTap: () {
-                    Get.toNamed(AppRoutes.checkOutDetails);
-                  },
-                  child: Container(
-                    padding: const EdgeInsets.only(
-                        left: 30, right: 30, top: 10, bottom: 10),
-                    decoration: BoxDecoration(
-                      color: FoodiesColors.accentColor,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: const Text(
-                      "Add",
-                      style: TextStyle(fontSize: 18, color: Colors.white),
-                    ),
-                  ),
-                )
+                Obx(() {
+                  if (_addProductCart.isProduct(index)) {
+                    if (_orderQtyBtn.productHomeQty == 0) {
+                      return GestureDetector(
+                        onTap: () {
+                          _addProductCart.toggleAddProduct(index);
+                        },
+                        child: Container(
+                          width: 80.w,
+                          alignment: Alignment.center,
+                          padding: EdgeInsets.only(
+                            left: 10.w,
+                            right: 10.w,
+                            top: 10.h,
+                            bottom: 10.h,
+                          ),
+                          decoration: BoxDecoration(
+                            color: FoodiesColors.accentColor,
+                            borderRadius: BorderRadius.circular(10.r),
+                          ),
+                          child: Text(
+                            "Add",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16.sp,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      );
+                    } else {
+                      return Container(
+                        width: 80.w,
+                        padding: EdgeInsets.only(
+                          left: 10.w,
+                          right: 10.w,
+                          top: 10.h,
+                          bottom: 10.h,
+                        ),
+                        decoration: BoxDecoration(
+                          border: Border.all(color: FoodiesColors.accentColor),
+                          borderRadius: BorderRadius.circular(10.r),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                _orderQtyBtn.qtyProductHomeDecrement(index);
+                              },
+                              child: Text(
+                                "-",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18.sp,
+                                  color: FoodiesColors.accentColor,
+                                ),
+                              ),
+                            ),
+                            Obx(() {
+                              return Text(
+                                _orderQtyBtn.productHomeQty.string,
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16.sp,
+                                  color: FoodiesColors.accentColor,
+                                ),
+                              );
+                            }),
+                            GestureDetector(
+                              onTap: () {
+                                _orderQtyBtn.qtyProductHomeIncrement(index);
+                              },
+                              child: Text(
+                                "+",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16.sp,
+                                  color: FoodiesColors.accentColor,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    }
+                  } else {
+                    return Container(
+                      width: 80.w,
+                      padding: EdgeInsets.only(
+                        left: 10.w,
+                        right: 10.w,
+                        top: 10.h,
+                        bottom: 10.h,
+                      ),
+                      decoration: BoxDecoration(
+                        border: Border.all(color: FoodiesColors.accentColor),
+                        borderRadius: BorderRadius.circular(10.r),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+                              _orderQtyBtn.qtyProductHomeDecrement(index);
+                            },
+                            child: Text(
+                              "-",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18.sp,
+                                color: FoodiesColors.accentColor,
+                              ),
+                            ),
+                          ),
+                          Obx(() {
+                            return Text(
+                              _orderQtyBtn.productHomeQty.string,
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16.sp,
+                                color: FoodiesColors.accentColor,
+                              ),
+                            );
+                          }),
+                          GestureDetector(
+                            onTap: () {
+                              _orderQtyBtn.qtyProductHomeIncrement(index);
+                            },
+                            child: Text(
+                              "+",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16.sp,
+                                color: FoodiesColors.accentColor,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  }
+                })
               ],
             ),
           )

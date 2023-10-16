@@ -30,4 +30,19 @@ class OrderQtyBtn extends GetxController {
     }
     update();
   }
+
+  RxInt productHomeQty = 0.obs;
+
+  void qtyProductHomeIncrement(int item) {
+    productHomeQty++;
+
+    update();
+  }
+
+  void qtyProductHomeDecrement(int item) {
+    if (productHomeQty != 1) {
+      productHomeQty--;
+    }
+    update();
+  }
 }

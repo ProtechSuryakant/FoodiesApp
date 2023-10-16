@@ -19,6 +19,7 @@ class _FoodDetailsState extends State<FoodDetails> {
   OrderQtyBtn orderQtyBtn = Get.put(OrderQtyBtn());
 
   String selectedOption = 'Option 1';
+
   int Qtyval = 1;
   final arguments = Get.arguments;
   String tag = "";
@@ -161,24 +162,22 @@ class _FoodDetailsState extends State<FoodDetails> {
         ),
       ]),
       bottomNavigationBar: Container(
-        height: h * 0.15,
-        width: w,
-        margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+        margin: EdgeInsets.symmetric(horizontal: 10.r, vertical: 10.r),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15),
             color: FoodiesColors.cardBackground),
         child: Container(
-          padding: EdgeInsets.all(15),
+          padding: EdgeInsets.all(15.r),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                height: 60,
-                width: 170,
+                // padding: EdgeInsets.symmetric(horizontal: 5.r),
+                height: 60.h,
+                width: 150.w,
                 decoration: BoxDecoration(
                     color: FoodiesColors.accentColor,
-                    borderRadius: BorderRadius.circular(10)),
+                    borderRadius: BorderRadius.circular(10.r)),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
@@ -186,20 +185,20 @@ class _FoodDetailsState extends State<FoodDetails> {
                       onPressed: () {
                         orderQtyBtn.qtyDecrement();
                       },
-                      child: const Text(
+                      child: Text(
                         "-",
                         style: TextStyle(
                             color: Colors.white,
-                            fontSize: 15,
+                            fontSize: 14.sp,
                             fontWeight: FontWeight.bold),
                       ),
                     ),
                     Obx(
                       () => Text(
                         orderQtyBtn.Qty.value.toString(),
-                        style: const TextStyle(
+                        style: TextStyle(
                           color: Colors.white,
-                          fontSize: 15,
+                          fontSize: 14.sp,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -208,31 +207,34 @@ class _FoodDetailsState extends State<FoodDetails> {
                       onPressed: () {
                         orderQtyBtn.qtyIncrement();
                       },
-                      child: const Text(
+                      child: Text(
                         "+",
                         style: TextStyle(
                             color: Colors.white,
-                            fontSize: 15,
+                            fontSize: 14.sp,
                             fontWeight: FontWeight.bold),
                       ),
                     ),
                   ],
                 ),
               ),
+              SizedBox(
+                width: 5.w,
+              ),
               Container(
-                height: 60,
-                width: 170,
+                height: 60.h,
+                width: 150.w,
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
                   border:
                       Border.all(color: FoodiesColors.accentColor, width: 2),
                 ),
-                child: const Text(
+                child: Text(
                   "Add to card",
                   style: TextStyle(
                       color: FoodiesColors.accentColor,
-                      fontSize: 20,
+                      fontSize: 16.sp,
                       fontWeight: FontWeight.w500),
                 ),
               ),

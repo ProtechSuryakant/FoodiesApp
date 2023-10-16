@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:foodies_app/constants/appTextStyles.dart';
 import 'package:foodies_app/constants/colors.dart';
+import 'package:foodies_app/data/models/addressModal.dart';
 import 'package:foodies_app/utils/addresscard.dart';
 import 'package:get/get.dart';
 
@@ -63,9 +64,16 @@ class _AddressBookState extends State<AddressBook> {
               margin: EdgeInsets.symmetric(vertical: 10.r),
               height: h,
               child: ListView.builder(
-                  itemCount: 5,
+                  itemCount: addressData.length,
                   itemBuilder: (context, index) {
-                    return AddressCard();
+                    return AddressCard(
+                        addressId: addressData[index].addressId,
+                        addressStatus: addressData[index].addressStatus,
+                        addressType: addressData[index].addressType,
+                        actualAddress: addressData[index].actualAddress,
+                        areaAddress: addressData[index].areaAddress,
+                        landmark: addressData[index].landmark,
+                        addressDistance: addressData[index].addressDistance);
                   }))
         ],
       ),

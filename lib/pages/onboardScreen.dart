@@ -5,7 +5,6 @@ import 'package:foodies_app/app/routes/routes.dart';
 import 'package:foodies_app/constants/appFonts.dart';
 import 'package:foodies_app/constants/assets.dart';
 import 'package:foodies_app/constants/colors.dart';
-import 'package:foodies_app/constants/fontSizes.dart';
 import 'package:foodies_app/widgtes/DotIndicator.dart';
 import 'package:get/get.dart';
 
@@ -46,8 +45,8 @@ class _OnBoardScreenState extends State<OnBoardScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Expanded(
-                  flex: 40,
+                SizedBox(
+                  height: h * 0.7.h,
                   child: PageView(
                     controller: _pageController,
                     onPageChanged: (int index) {
@@ -64,7 +63,7 @@ class _OnBoardScreenState extends State<OnBoardScreen> {
                   ),
                 ),
                 SizedBox(
-                  height: h * 0.01,
+                  height: 10.h,
                 ),
                 Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                   ...List.generate(
@@ -78,18 +77,17 @@ class _OnBoardScreenState extends State<OnBoardScreen> {
                   ),
                 ]),
                 SizedBox(
-                  height: h * 0.01,
+                  height: 10.h,
                 ),
                 Container(
-                  height: h * 0.06,
-                  width: w * 0.9,
+                  width: w.w,
+                  height: 50.h,
                   margin: EdgeInsets.symmetric(
-                    horizontal: w * 0.05,
-                    vertical: h * 0.01,
+                    horizontal: 30.w,
+                    vertical: 10.h,
                   ),
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(h * 0.04),
-                    color: FoodiesColors.accentColor,
+                    borderRadius: BorderRadius.circular(40.r),
                   ),
                   child: ElevatedButton(
                     onPressed: () {
@@ -107,8 +105,9 @@ class _OnBoardScreenState extends State<OnBoardScreen> {
                     child: Obx(() => Text(
                           btnTitle.value,
                           style: TextStyle(
-                            fontSize: h * 0.03,
-                            fontWeight: FontWeight.w500,
+                            fontSize: 22.sp,
+                            fontFamily: 'Inter',
+                            fontWeight: FontWeight.bold,
                           ),
                         )),
                   ),
@@ -120,13 +119,13 @@ class _OnBoardScreenState extends State<OnBoardScreen> {
                   child: Text(
                     "Skip",
                     style: TextStyle(
-                      fontSize: h * 0.025,
+                      fontSize: 20.sp,
                       color: Colors.black.withOpacity(0.5),
                     ),
                   ),
                 ),
                 SizedBox(
-                  height: h * 0.05,
+                  height: 50.h,
                 ),
               ],
             ),
@@ -146,11 +145,11 @@ class _OnBoardScreenState extends State<OnBoardScreen> {
           children: [
             const Spacer(),
             SizedBox(
-              height: h * 0.1,
+              height: h * 0.1.h,
             ),
             Container(
-              margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 50),
-              height: h * 0.45,
+              margin: EdgeInsets.symmetric(horizontal: 20.w, vertical: 50.h),
+              height: h * 0.45.h,
               width: w,
               decoration: const BoxDecoration(
                 image: DecorationImage(
@@ -165,7 +164,7 @@ class _OnBoardScreenState extends State<OnBoardScreen> {
                 text: "ENJOY ",
                 style: TextStyle(
                   color: Colors.black,
-                  fontSize: h * 0.035,
+                  fontSize: h * 0.035.sp,
                   fontWeight: FontWeight.bold,
                   fontFamily: AppFonts.Inter,
                 ),
@@ -174,7 +173,7 @@ class _OnBoardScreenState extends State<OnBoardScreen> {
                     text: "DELICIOUS FOOD",
                     style: TextStyle(
                       color: FoodiesColors.primaryColor,
-                      fontSize: h * 0.035,
+                      fontSize: h * 0.035.sp,
                       fontWeight: FontWeight.bold,
                       fontFamily: AppFonts.Inter,
                     ),
@@ -183,7 +182,7 @@ class _OnBoardScreenState extends State<OnBoardScreen> {
                     text: " IN YOUR HEALTHY LIFE.",
                     style: TextStyle(
                       color: Colors.black,
-                      fontSize: h * 0.035,
+                      fontSize: h * 0.035.sp,
                       fontWeight: FontWeight.bold,
                       fontFamily: AppFonts.Inter,
                     ),
@@ -192,16 +191,16 @@ class _OnBoardScreenState extends State<OnBoardScreen> {
               ),
             ),
             SizedBox(
-              height: h * 0.02,
+              height: h * 0.02.h,
             ),
             Container(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
+              padding: EdgeInsets.symmetric(horizontal: 20.w),
               child: Text(
                 "There are many variations of passages of Lorem ipsum available, but the majority have suffered alteration in some form, by injected humour.",
                 textAlign: TextAlign.center,
                 overflow: TextOverflow.visible,
                 style: TextStyle(
-                  fontSize: h * 0.025,
+                  fontSize: h * 0.025.sp,
                   fontFamily: AppFonts.Inder,
                 ),
               ),
@@ -219,12 +218,12 @@ class _OnBoardScreenState extends State<OnBoardScreen> {
           children: [
             const Spacer(),
             SizedBox(
-              height: h * 0.1,
+              height: h * 0.1.h,
             ),
             Container(
-              margin: const EdgeInsets.symmetric(horizontal: 20),
-              height: h * 0.5,
-              width: w,
+              margin: EdgeInsets.symmetric(horizontal: 20.w),
+              height: h * 0.5.h,
+              width: w.w,
               decoration: const BoxDecoration(
                 image: DecorationImage(
                   image: AssetImage(AppAssets.burger4),
@@ -233,7 +232,7 @@ class _OnBoardScreenState extends State<OnBoardScreen> {
               ),
             ),
             SizedBox(
-              height: h * 0.05,
+              height: h * 0.05.h,
             ),
             RichText(
               textAlign: TextAlign.center,
@@ -241,7 +240,7 @@ class _OnBoardScreenState extends State<OnBoardScreen> {
                 text: "PICK ",
                 style: TextStyle(
                   color: Colors.black,
-                  fontSize: h * 0.035,
+                  fontSize: h * 0.035.sp,
                   fontWeight: FontWeight.bold,
                   fontFamily: AppFonts.Inter,
                 ),
@@ -250,7 +249,7 @@ class _OnBoardScreenState extends State<OnBoardScreen> {
                     text: " THE FOOD",
                     style: TextStyle(
                       color: FoodiesColors.primaryColor,
-                      fontSize: h * 0.035,
+                      fontSize: h * 0.035.sp,
                       fontWeight: FontWeight.bold,
                       fontFamily: AppFonts.Inter,
                     ),
@@ -259,16 +258,16 @@ class _OnBoardScreenState extends State<OnBoardScreen> {
               ),
             ),
             SizedBox(
-              height: h * 0.02,
+              height: h * 0.02.h,
             ),
             Container(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
+              padding: EdgeInsets.symmetric(horizontal: 20.w),
               child: Text(
                 "Praesent auctor, elit ut consequat vulputate, ipsum odio venenatis massa, vel finibus metus tortor eget nunc.Sed auctor eget purus non interdum. Nullam id metus at elit cursus hendrerit nec in ex.",
                 textAlign: TextAlign.center,
                 overflow: TextOverflow.visible,
                 style: TextStyle(
-                  fontSize: h * 0.025,
+                  fontSize: h * 0.025.h,
                   fontFamily: AppFonts.Inder,
                 ),
               ),
@@ -286,12 +285,12 @@ class _OnBoardScreenState extends State<OnBoardScreen> {
           children: [
             const Spacer(),
             SizedBox(
-              height: h * 0.1,
+              height: h * 0.1.h,
             ),
             Container(
               margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 30),
-              height: h * 0.4,
-              width: w,
+              height: h * 0.4.h,
+              width: w.w,
               decoration: const BoxDecoration(
                 image: DecorationImage(
                   image: AssetImage(AppAssets.foods3),
@@ -305,7 +304,7 @@ class _OnBoardScreenState extends State<OnBoardScreen> {
                 text: "EAT,",
                 style: TextStyle(
                   color: Colors.black,
-                  fontSize: h * 0.035,
+                  fontSize: h * 0.035.sp,
                   fontWeight: FontWeight.bold,
                   fontFamily: AppFonts.Inter,
                 ),
@@ -314,7 +313,7 @@ class _OnBoardScreenState extends State<OnBoardScreen> {
                     text: "LOVE,",
                     style: TextStyle(
                       color: FoodiesColors.primaryColor,
-                      fontSize: h * 0.035,
+                      fontSize: h * 0.035.sp,
                       fontWeight: FontWeight.bold,
                       fontFamily: AppFonts.Inter,
                     ),
@@ -322,7 +321,7 @@ class _OnBoardScreenState extends State<OnBoardScreen> {
                   TextSpan(
                     text: " REPEAT",
                     style: TextStyle(
-                      fontSize: h * 0.035,
+                      fontSize: h * 0.035.sp,
                       fontWeight: FontWeight.bold,
                       fontFamily: AppFonts.Inter,
                     ),
@@ -331,16 +330,16 @@ class _OnBoardScreenState extends State<OnBoardScreen> {
               ),
             ),
             SizedBox(
-              height: h * 0.02,
+              height: h * 0.02.h,
             ),
             Container(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
+              padding: EdgeInsets.symmetric(horizontal: 20.w),
               child: Text(
-                "Eat, Love, Repeat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed auctor, quam non cursus aliquet, urna nisi commodo turpis, vel commodo risus orci ac massa. Nulla facilisi. Nullam aliquam dapibus metus a viverra. ",
+                "Eat, Love, Repeat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed auctor, quam non cursus aliquet, urna nisi commodo turpis, vel commodo risus orci ac massa. Nulla facilisi. Nullam aliquam dapibus metus a viverra.",
                 textAlign: TextAlign.center,
                 overflow: TextOverflow.visible,
                 style: TextStyle(
-                  fontSize: h * 0.025,
+                  fontSize: h * 0.025.sp,
                   fontFamily: AppFonts.Inder,
                 ),
               ),

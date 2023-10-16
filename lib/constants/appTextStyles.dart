@@ -16,7 +16,7 @@ class AppTextStyles {
     fontFamily: 'Inder',
   );
   static const titleStyle = TextStyle(
-    fontSize: 16,
+    fontSize: 14,
     fontWeight: FontWeight.w500,
     fontFamily: 'Inder',
     color: FoodiesColors.textColor,

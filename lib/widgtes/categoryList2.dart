@@ -30,9 +30,10 @@ class _CategoryListState extends State<CategoryList2> {
     double w = MediaQuery.of(context).size.width;
     double h = MediaQuery.of(context).size.height;
     return Container(
-      height: h * 0.07.h,
-      width: w,
-      margin: const EdgeInsets.only(left: 10, right: 10),
+      height: 55.h,
+      width: w.w,
+      alignment: Alignment.center,
+      margin: EdgeInsets.only(left: 10.w, right: 10.w),
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: 4,
@@ -48,9 +49,8 @@ class _CategoryListState extends State<CategoryList2> {
                       backgroundColor: Colors.transparent,
                       builder: (BuildContext context) {
                         return SizedBox(
-                            // color: Colors.amber,
-                            height: h * 0.75,
-                            width: w,
+                            height: 600.h,
+                            width: w.w,
                             child: Stack(
                               children: [
                                 Positioned(
@@ -76,16 +76,14 @@ class _CategoryListState extends State<CategoryList2> {
                                         height: 10.h,
                                       ),
                                       Container(
-                                        height: h * 0.65,
+                                        height: h * 0.60.w,
                                         width: w,
                                         decoration: BoxDecoration(
                                             color: FoodiesColors.cardBackground,
-                                            borderRadius:
-                                                const BorderRadius.only(
-                                                    topLeft:
-                                                        Radius.circular(20),
-                                                    topRight:
-                                                        Radius.circular(20)),
+                                            borderRadius: BorderRadius.only(
+                                                topLeft: Radius.circular(20.r),
+                                                topRight:
+                                                    Radius.circular(20.r)),
                                             boxShadow: [
                                               BoxShadow(
                                                   blurRadius: 0.5,
@@ -99,10 +97,10 @@ class _CategoryListState extends State<CategoryList2> {
                                           children: [
                                             Container(
                                               alignment: Alignment.centerLeft,
-                                              margin: const EdgeInsets.only(
-                                                  top: 20,
-                                                  left: 20,
-                                                  bottom: 10),
+                                              margin: EdgeInsets.only(
+                                                  top: 20.h,
+                                                  left: 20.w,
+                                                  bottom: 10.h),
                                               child: const Text(
                                                 "Sort",
                                                 style: AppTextStyles
@@ -117,8 +115,8 @@ class _CategoryListState extends State<CategoryList2> {
                                             ),
                                             Container(
                                               alignment: Alignment.centerLeft,
-                                              padding: const EdgeInsets.only(
-                                                  left: 20, bottom: 10),
+                                              padding: EdgeInsets.only(
+                                                  left: 20.w, bottom: 10.h),
                                               child: Row(
                                                 mainAxisAlignment:
                                                     MainAxisAlignment
@@ -148,8 +146,8 @@ class _CategoryListState extends State<CategoryList2> {
                                             ),
                                             Container(
                                               alignment: Alignment.centerLeft,
-                                              padding: const EdgeInsets.only(
-                                                  left: 20, bottom: 10),
+                                              padding: EdgeInsets.only(
+                                                  left: 20.w, bottom: 10.h),
                                               child: Row(
                                                 mainAxisAlignment:
                                                     MainAxisAlignment
@@ -178,8 +176,8 @@ class _CategoryListState extends State<CategoryList2> {
                                             ),
                                             Container(
                                               alignment: Alignment.centerLeft,
-                                              padding: const EdgeInsets.only(
-                                                  left: 20, bottom: 10),
+                                              padding: EdgeInsets.only(
+                                                  left: 20.w, bottom: 10.h),
                                               child: Row(
                                                 mainAxisAlignment:
                                                     MainAxisAlignment
@@ -208,8 +206,8 @@ class _CategoryListState extends State<CategoryList2> {
                                             ),
                                             Container(
                                               alignment: Alignment.centerLeft,
-                                              padding: const EdgeInsets.only(
-                                                  left: 20, bottom: 10),
+                                              padding: EdgeInsets.only(
+                                                  left: 20.w, bottom: 10.h),
                                               child: Row(
                                                 mainAxisAlignment:
                                                     MainAxisAlignment
@@ -238,8 +236,8 @@ class _CategoryListState extends State<CategoryList2> {
                                             ),
                                             Container(
                                               alignment: Alignment.centerLeft,
-                                              padding: const EdgeInsets.only(
-                                                  left: 20, bottom: 10),
+                                              padding: EdgeInsets.only(
+                                                  left: 20.w, bottom: 10.h),
                                               child: Row(
                                                 mainAxisAlignment:
                                                     MainAxisAlignment
@@ -268,8 +266,8 @@ class _CategoryListState extends State<CategoryList2> {
                                             ),
                                             Container(
                                               alignment: Alignment.centerLeft,
-                                              padding: const EdgeInsets.only(
-                                                  left: 20, bottom: 10),
+                                              padding: EdgeInsets.only(
+                                                  left: 20.w, bottom: 10.h),
                                               child: Row(
                                                 mainAxisAlignment:
                                                     MainAxisAlignment
@@ -303,8 +301,8 @@ class _CategoryListState extends State<CategoryList2> {
                                               color: FoodiesColors.accentColor,
                                             ),
                                             Container(
-                                              padding: const EdgeInsets.only(
-                                                  left: 15, right: 20),
+                                              padding: EdgeInsets.only(
+                                                  left: 15.w, right: 20.h),
                                               child: Row(
                                                 mainAxisAlignment:
                                                     MainAxisAlignment
@@ -312,11 +310,11 @@ class _CategoryListState extends State<CategoryList2> {
                                                 children: [
                                                   TextButton(
                                                       onPressed: () {},
-                                                      child: const Text(
+                                                      child: Text(
                                                         "Clear All",
                                                         style: TextStyle(
                                                             fontFamily: 'Inter',
-                                                            fontSize: 18,
+                                                            fontSize: 16.sp,
                                                             color: FoodiesColors
                                                                 .accentColor,
                                                             fontWeight:
@@ -324,27 +322,26 @@ class _CategoryListState extends State<CategoryList2> {
                                                                     .bold),
                                                       )),
                                                   InkWell(
-                                                    onTap: () =>
-                                                        print("Applied"),
+                                                    onTap: () => Get.back(),
                                                     child: Container(
-                                                      padding:
-                                                          const EdgeInsets.only(
-                                                              top: 10,
-                                                              left: 15,
-                                                              right: 15,
-                                                              bottom: 10),
+                                                      padding: EdgeInsets.only(
+                                                          top: 10.h,
+                                                          left: 15.w,
+                                                          right: 15.w,
+                                                          bottom: 10.h),
                                                       decoration: BoxDecoration(
                                                           borderRadius:
                                                               BorderRadius
-                                                                  .circular(15),
+                                                                  .circular(
+                                                                      15.r),
                                                           color: FoodiesColors
                                                               .accentColor),
-                                                      child: const Text(
+                                                      child: Text(
                                                         "Apply",
                                                         style: TextStyle(
                                                             color: FoodiesColors
                                                                 .cardColor,
-                                                            fontSize: 18,
+                                                            fontSize: 16.sp,
                                                             fontWeight:
                                                                 FontWeight
                                                                     .bold),

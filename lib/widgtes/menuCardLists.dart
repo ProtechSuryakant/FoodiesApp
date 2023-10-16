@@ -17,9 +17,10 @@ class MenuCardList extends StatelessWidget {
     double w = MediaQuery.of(context).size.width;
 
     return Container(
-      margin: const EdgeInsetsDirectional.symmetric(horizontal: 15),
-      height: h * 0.33.h,
-      width: w.h,
+      margin: EdgeInsetsDirectional.symmetric(horizontal: 15.w),
+      height: 200.h,
+      width: w.w,
+      alignment: Alignment.center,
       decoration: BoxDecoration(
           color: FoodiesColors.cardColor,
           borderRadius: BorderRadius.circular(15),
@@ -33,13 +34,15 @@ class MenuCardList extends StatelessWidget {
       child: ListView.builder(
         itemCount: menuList.length,
         scrollDirection: Axis.horizontal,
+        shrinkWrap: true,
         itemBuilder: (BuildContext context, int index) {
           return Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               MenuCard(
                 image: menuList[index].image,
                 categoryTitle: menuList[index].menuTitle,
-                categoryDetails: menuList[index].menuDesc,
                 function: () {
                   Get.toNamed(
                     AppRoutes.menuPage,

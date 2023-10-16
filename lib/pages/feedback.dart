@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:foodies_app/app/routes/routes.dart';
 import 'package:foodies_app/constants/appTextStyles.dart';
 import 'package:foodies_app/constants/colors.dart';
 import 'package:get/get.dart';
@@ -48,7 +47,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
               border: Border.all(width: 1),
             ),
             child: TextFormField(
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                   hintText: "Feedback title", border: InputBorder.none),
             ),
           ),
@@ -81,7 +80,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
           ),
           InkWell(
             onTap: () {
-              Get.offNamed(AppRoutes.loginNumber);
+              Get.back();
             },
             child: Container(
               margin: EdgeInsets.symmetric(horizontal: 20.r, vertical: 10.r),

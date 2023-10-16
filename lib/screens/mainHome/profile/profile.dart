@@ -9,6 +9,7 @@ import 'package:foodies_app/constants/assets.dart';
 import 'package:foodies_app/constants/colors.dart';
 import 'package:foodies_app/constants/fontSizes.dart';
 import 'package:foodies_app/constants/msgTitle.dart';
+import 'package:foodies_app/main.dart';
 import 'package:get/get.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -108,16 +109,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             color: Colors.black.withOpacity(0.3),
                             offset: const Offset(0, 0.5))
                       ]),
-                  child: const Column(
+                  child: Column(
                     children: [
                       Icon(
                         Icons.favorite_border,
-                        size: 30,
+                        size: 30.sp,
                       ),
                       Text(
                         "Food Like",
                         style: TextStyle(
-                            fontSize: FontSize.mediumBodyText,
+                            fontSize: 16.sp,
                             fontFamily: 'Inter',
                             fontWeight: FontWeight.w500),
                       )
@@ -137,16 +138,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             color: Colors.black.withOpacity(0.3),
                             offset: const Offset(0, 0.5))
                       ]),
-                  child: const Column(
+                  child: Column(
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.credit_card,
                         size: 30,
                       ),
                       Text(
                         "Payment",
                         style: TextStyle(
-                            fontSize: FontSize.mediumBodyText,
+                            fontSize: 16.sp,
                             fontFamily: 'Inter',
                             fontWeight: FontWeight.w500),
                       )
@@ -166,16 +167,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             color: Colors.black.withOpacity(0.3),
                             offset: const Offset(0, 0.5))
                       ]),
-                  child: const Column(
+                  child: Column(
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.settings,
                         size: 30,
                       ),
                       Text(
                         "Settings",
                         style: TextStyle(
-                            fontSize: FontSize.mediumBodyText,
+                            fontSize: 16.sp,
                             fontFamily: 'Inter',
                             fontWeight: FontWeight.w500),
                       )
@@ -335,7 +336,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     height: 10.h,
                   ),
                   InkWell(
-                    onTap: () => Get.toNamed(AppRoutes.aboutus),
+                    onTap: () => Get.toNamed(AppRoutes.about),
                     child: Container(
                       padding: EdgeInsets.symmetric(
                           horizontal: 15.r, vertical: 15.r),
@@ -417,6 +418,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
             child: InkWell(
               onTap: () {
                 Get.offNamed(AppRoutes.loginNumber);
+                box.write('isLogged', false);
+                print(box.read('isLogged'));
               },
               child: Container(
                 margin: EdgeInsets.symmetric(horizontal: 20.r, vertical: 10.r),

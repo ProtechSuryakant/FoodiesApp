@@ -12,7 +12,6 @@ import 'package:foodies_app/constants/colors.dart';
 import 'package:foodies_app/constants/fontSizes.dart';
 import 'package:foodies_app/constants/msgTitle.dart';
 import 'package:get/get.dart';
-import 'package:intl_phone_field/intl_phone_field.dart';
 
 class OTPVerification extends StatefulWidget {
   const OTPVerification({super.key});
@@ -73,18 +72,6 @@ class _OTPVerificationState extends State<OTPVerification> {
               ),
               child: Row(
                 children: [
-                  IconButton(
-                      onPressed: () {
-                        Get.back();
-                      },
-                      icon: const Icon(
-                        CupertinoIcons.back,
-                        size: 30,
-                        // color: FoodiesColors.accentColor,
-                      )),
-                  SizedBox(
-                    width: 40.h,
-                  ),
                   Text(
                     "Verification Code",
                     style: TextStyle(
@@ -106,7 +93,7 @@ class _OTPVerificationState extends State<OTPVerification> {
               child: Column(
                 children: [
                   Text(
-                    "Please enter the OTP sent to your mobile number.",
+                    "Please enter  OTP sent to your mobile number.",
                     style: TextStyle(fontSize: FontSize.smallBodyText),
                   ),
                   SizedBox(
@@ -128,14 +115,6 @@ class _OTPVerificationState extends State<OTPVerification> {
                         width: w * 0.05.h,
                       ),
                       buildOTPTextField(_otpController4),
-                      // SizedBox(
-                      //   width: w * 0.1.h,
-                      // ),
-                      // buildOTPTextField(_otpController5),
-                      // SizedBox(
-                      //   width: 10.h,
-                      // ),
-                      // buildOTPTextField(_otpController6),
                     ],
                   ),
                 ],
@@ -156,7 +135,6 @@ class _OTPVerificationState extends State<OTPVerification> {
                           context: context,
                           dialogType: DialogType.info,
                           animType: AnimType.topSlide,
-                          // showCloseIcon: true,
                           title: MsgTitle.Info,
                           titleTextStyle: const TextStyle(
                               color: Color(0xFF293265),
@@ -175,13 +153,12 @@ class _OTPVerificationState extends State<OTPVerification> {
                           animType: AnimType.topSlide,
                           dialogType: DialogType.success,
                           title: MsgTitle.Success,
-                          desc: AppMessages.success,
                           descTextStyle:
                               const TextStyle(fontSize: FontSize.smallBodyText),
                           isDense: false,
                           btnOkText: 'OK',
                           btnOkOnPress: () {
-                            Get.toNamed(AppRoutes.homeMain);
+                            Get.offAndToNamed(AppRoutes.homeMain);
                           },
                           btnOkColor: FoodiesColors.accentColor)
                       .show();

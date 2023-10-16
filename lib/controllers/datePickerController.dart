@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 class DatePickerController extends GetxController {
-  DateTime selectedDate = DateTime.now();
+  DateTime selectedDate = DateTime(1990, 1, 1);
   DateFormat dateFormat = DateFormat('dd-MM-yyyy');
   RxString formattedDate = ''.obs;
 
@@ -27,7 +27,7 @@ class DatePickerController extends GetxController {
               height: 200,
               child: CalendarDatePicker(
                 initialDate: selectedDate,
-                firstDate: DateTime(2023),
+                firstDate: DateTime(1990),
                 lastDate: DateTime(2025),
                 onDateChanged: (newDate) {
                   selectedDate = newDate;

@@ -12,17 +12,18 @@ class CategoryCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.center,
-      padding: const EdgeInsets.only(top: 10),
+      padding: EdgeInsets.only(top: 10.h),
       child: Column(children: [
         SizedBox(
           height: 60.h,
-          width: 60.h,
+          width: 60.w,
           child: Image.asset(image),
         ),
         Text(
           catTitle,
-          style: const TextStyle(
-            fontSize: 16,
+          overflow: TextOverflow.visible,
+          style: TextStyle(
+            fontSize: 12.sp,
             fontFamily: 'Inder',
             color: FoodiesColors.textColor,
           ),

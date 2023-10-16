@@ -43,6 +43,7 @@ flutter:
     - assets/images/
     - assets/png/
     - assets/images/samplevideo.mp4
+    - assets/gifs/
   fonts:
     - family: Bauhaus
       fonts:

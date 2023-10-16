@@ -29,7 +29,7 @@ class _ProductListState extends State<ProductList> {
                   "Margherita Pizza features a thin crust topped with three basic ingredients: fresh tomato sauce, mozzarella cheese, and fresh basil leaves.",
               rating: 3.5,
               disLike: Icons.favorite_border_outlined,
-              index: index,
+              index: index + 1,
             ),
           );
         },

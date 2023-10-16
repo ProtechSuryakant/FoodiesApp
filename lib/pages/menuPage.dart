@@ -58,12 +58,6 @@ class _MenuPageState extends State<MenuPage> {
                     CupertinoIcons.search,
                     color: FoodiesColors.accentColor,
                   )),
-              IconButton(
-                  onPressed: () {},
-                  icon: const Icon(
-                    Icons.share_sharp,
-                    color: FoodiesColors.accentColor,
-                  )),
             ],
             backgroundColor: FoodiesColors.backgroundColor,
           ),

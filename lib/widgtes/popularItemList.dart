@@ -17,7 +17,7 @@ class _PopularItemListState extends State<PopularItemList> {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.only(right: 10.r),
-      height: MediaQuery.of(context).size.height * 0.40.h,
+      height: 300.h,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: 6,

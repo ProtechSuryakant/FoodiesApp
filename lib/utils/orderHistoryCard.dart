@@ -1,42 +1,50 @@
+import 'dart:ui';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:foodies_app/constants/assets.dart';
 import 'package:foodies_app/constants/colors.dart';
-import 'package:foodies_app/constants/fontSizes.dart';
 import 'package:foodies_app/constants/words.dart';
+import 'package:foodies_app/data/models/orderItemDataModal.dart';
+import 'package:foodies_app/utils/orderHistoryItemCard.dart';
+import 'package:get/get.dart';
 
-class OrderHistoryCard extends StatelessWidget {
-  final String image;
-  final String title;
-  final String address;
+class OrderHistoryCard extends StatefulWidget {
+  final int? orderId;
   final String status;
-  final Color btnColor;
-  final Color txtColor;
-  final int qty;
-  final String size;
-  final String date;
-  final double price;
+  final int totalQty;
+  final String dateTime;
+  final double totalPrice;
+  final String orderAddress;
   final double rating;
+
   const OrderHistoryCard(
       {super.key,
-      required this.image,
-      required this.address,
+      this.orderId,
       required this.status,
-      required this.btnColor,
-      required this.qty,
-      required this.size,
-      required this.date,
-      required this.price,
-      required this.rating,
-      required this.title,
-      required this.txtColor});
+      required this.totalQty,
+      required this.dateTime,
+      required this.totalPrice,
+      required this.orderAddress,
+      required this.rating});
 
   @override
+  State<OrderHistoryCard> createState() => _OrderHistoryCardState();
+}
+
+class _OrderHistoryCardState extends State<OrderHistoryCard> {
+  @override
   Widget build(BuildContext context) {
+    String Status = widget.status;
+    print("Status : $Status");
+
+    List filteredOrderItemData =
+        orderItemData.where((item) => item.orderId == widget.orderId).toList();
+
     double w = MediaQuery.of(context).size.width;
     double h = MediaQuery.of(context).size.height;
+
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 10.r, vertical: 10.r),
       width: w.h,
@@ -52,104 +60,20 @@ class OrderHistoryCard extends StatelessWidget {
           ]),
       child: Column(
         children: [
-          Container(
-              // height: h * 0.1.h,
-              width: w.h,
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-              decoration: BoxDecoration(
-                  borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(15),
-                      topRight: Radius.circular(15)),
-                  color: FoodiesColors.cardColor),
-              child: Row(
-                children: [
-                  Container(
-                    height: h * 0.12.h,
-                    width: w * 0.25.w,
-                    decoration: BoxDecoration(
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(15)),
-                        image: DecorationImage(
-                            image: AssetImage(image), fit: BoxFit.cover)),
-                  ),
-                  Container(
-                    margin: EdgeInsets.symmetric(horizontal: 10.r),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text(
-                          textAlign: TextAlign.left,
-                          overflow: TextOverflow.ellipsis,
-                          title,
-                          style: TextStyle(
-                              fontSize: h * 0.022.sp,
-                              fontFamily: 'Inder',
-                              fontWeight: FontWeight.bold),
-                        ),
-                        Text(
-                          address,
-                          textAlign: TextAlign.left,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                              fontSize: h * 0.015.sp,
-                              fontFamily: 'Inder',
-                              fontWeight: FontWeight.w500),
-                        )
-                      ],
-                    ),
-                  ),
-                  Container(
-                    alignment: Alignment.centerRight,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(5),
-                              color: btnColor),
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 10, vertical: 5),
-                          child: Text(
-                            status,
-                            style: TextStyle(fontSize: 13.0.h, color: txtColor),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 5.h,
-                        ),
-                        InkWell(
-                          onTap: () {
-                            print("View Menu");
-                          },
-                          child: Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(5),
-                            ),
-                            child: Row(
-                              children: [
-                                Text(
-                                  "View Menu",
-                                  style: TextStyle(
-                                      fontSize: 12.h,
-                                      color: FoodiesColors.accentColor),
-                                ),
-                                Image(
-                                  image: const AssetImage(
-                                    AppAssets.down_arrow,
-                                  ),
-                                  color: FoodiesColors.accentColor,
-                                  height: 10.h,
-                                  width: 10.w,
-                                )
-                              ],
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                  )
-                ],
-              )),
+          if (filteredOrderItemData.isNotEmpty)
+            Wrap(
+              children: filteredOrderItemData.map((item) {
+                return OrderHistoryItemCard(
+                    image: item.image,
+                    title: item.title,
+                    subCategory: item.subCategory,
+                    portionSize: item.portionSize,
+                    qty: item.qty,
+                    unitPrice: item.unitPrice);
+              }).toList(),
+            )
+          else
+            Container(),
           const Divider(
             thickness: 1,
             indent: 10,
@@ -158,33 +82,52 @@ class OrderHistoryCard extends StatelessWidget {
           Container(
             padding: EdgeInsets.all(8.0.r),
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Container(
                     margin: EdgeInsets.symmetric(horizontal: 10.r),
                     child: Text(
                       overflow: TextOverflow.visible,
                       textAlign: TextAlign.left,
-                      "Qty. : $qty x",
-                      style: const TextStyle(
-                          fontSize: FontSize.smallBodyText,
+                      "Total Qty. : ${widget.totalQty}",
+                      style: TextStyle(
+                          fontSize: 12.sp,
                           fontFamily: 'Inder',
                           fontWeight: FontWeight.bold),
                     )),
+                const Spacer(),
+                Container(
+                  alignment: Alignment.centerRight,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
+                            color: Status == 'Process'
+                                ? Colors.green
+                                : (Status == 'Shipped'
+                                    ? Colors.yellow.shade800
+                                    : Colors.grey),
+                          ),
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 10.r, vertical: 5.r),
+                          child: Text(
+                            widget.status,
+                            style: TextStyle(
+                              fontSize: 12.0.sp,
+                              color: Status == 'Process'
+                                  ? Colors.white
+                                  : (Status == 'Shipped'
+                                      ? Colors.black
+                                      : Colors.black),
+                            ),
+                          )),
+                    ],
+                  ),
+                ),
+                SizedBox(width: 10.w)
               ],
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.symmetric(horizontal: 10.r),
-            padding: EdgeInsets.symmetric(horizontal: 10.r),
-            alignment: Alignment.centerLeft,
-            child: Text(
-              overflow: TextOverflow.visible,
-              textAlign: TextAlign.left,
-              size,
-              style: TextStyle(
-                fontSize: h * 0.015.sp,
-                fontFamily: 'Inder',
-              ),
             ),
           ),
           const Divider(
@@ -198,7 +141,7 @@ class OrderHistoryCard extends StatelessWidget {
               Container(
                 margin: EdgeInsets.symmetric(horizontal: 10.r),
                 child: Text(
-                  date,
+                  widget.dateTime,
                   style: TextStyle(
                     fontFamily: 'Inter',
                     fontSize: h * 0.015.sp,
@@ -206,10 +149,22 @@ class OrderHistoryCard extends StatelessWidget {
                   textAlign: TextAlign.start,
                 ),
               ),
+              const Spacer(),
               Container(
                 margin: EdgeInsets.symmetric(horizontal: 10.r),
                 child: Text(
-                  "${Words.INRSymbol} $price",
+                  "Grand Total :",
+                  style: TextStyle(
+                      fontFamily: 'Inter',
+                      fontSize: h * 0.015.sp,
+                      fontWeight: FontWeight.bold),
+                  textAlign: TextAlign.start,
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.symmetric(horizontal: 10.r),
+                child: Text(
+                  "${Words.INRSymbol} ${widget.totalPrice}",
                   style: TextStyle(
                       fontFamily: 'Inter',
                       fontSize: h * 0.015.sp,
@@ -242,7 +197,7 @@ class OrderHistoryCard extends StatelessWidget {
               Container(
                 padding: EdgeInsets.only(bottom: 5.r),
                 child: RatingBar.builder(
-                  initialRating: rating,
+                  initialRating: widget.rating,
                   allowHalfRating: true,
                   itemSize: 20,
                   itemBuilder: (context, index) => const Icon(
@@ -256,22 +211,25 @@ class OrderHistoryCard extends StatelessWidget {
               ),
               const Spacer(),
               InkWell(
-                onTap: () {
-                  print("Cancel not allowed..");
-                },
-                child: Container(
-                  alignment: Alignment.centerRight,
-                  margin: EdgeInsets.only(right: 10),
-                  padding: EdgeInsets.only(
-                    bottom: 5.r,
-                  ),
-                  child: Text(
-                    "Cancel Order.....",
-                    style: TextStyle(
-                        fontSize: 14.h, color: FoodiesColors.accentColor),
-                  ),
-                ),
-              )
+                  onTap: () {
+                    print("Cancel not allowed");
+                  },
+                  child: Status == 'Process'
+                      ? Container(
+                          alignment: Alignment.centerRight,
+                          margin: EdgeInsets.only(right: 10),
+                          padding: EdgeInsets.only(
+                            bottom: 5.r,
+                          ),
+                          child: Text(
+                            "Cancel Order",
+                            style: TextStyle(
+                                fontFamily: "Inder",
+                                fontSize: 14.h,
+                                color: FoodiesColors.accentColor),
+                          ),
+                        )
+                      : (Status == 'Shipped' ? Container() : Container()))
             ],
           )
         ],

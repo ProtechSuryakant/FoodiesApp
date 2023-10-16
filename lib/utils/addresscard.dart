@@ -4,7 +4,24 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:foodies_app/constants/colors.dart';
 
 class AddressCard extends StatelessWidget {
-  const AddressCard({super.key});
+  final int addressId;
+  final String? addressOf;
+  final String addressStatus;
+  final String addressType;
+  final String actualAddress;
+  final String areaAddress;
+  final String landmark;
+  final double addressDistance;
+  const AddressCard(
+      {super.key,
+      required this.addressId,
+      this.addressOf,
+      required this.addressStatus,
+      required this.addressType,
+      required this.actualAddress,
+      required this.areaAddress,
+      required this.landmark,
+      required this.addressDistance});
 
   @override
   Widget build(BuildContext context) {
@@ -24,22 +41,33 @@ class AddressCard extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          Column(
-            children: [
-              const Icon(
-                CupertinoIcons.home,
-                size: 20,
-              ),
-              SizedBox(
-                width: 50.w,
-                child: Text(
-                  textAlign: TextAlign.center,
-                  overflow: TextOverflow.ellipsis,
-                  "2.2 Km",
-                  style: TextStyle(fontSize: 12.sp),
+          CircleAvatar(
+            radius: 30,
+            backgroundColor: FoodiesColors.cardBackground,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  addressType == 'Home'
+                      ? CupertinoIcons.home
+                      : CupertinoIcons.bag,
+                  color: FoodiesColors.textColor,
+                  size: 25,
                 ),
-              ),
-            ],
+                SizedBox(
+                  width: 50.w,
+                  child: Text(
+                    textAlign: TextAlign.center,
+                    overflow: TextOverflow.ellipsis,
+                    "$addressDistance",
+                    style: TextStyle(
+                        color: FoodiesColors.textColor,
+                        fontSize: 12.sp,
+                        fontFamily: "Inder"),
+                  ),
+                ),
+              ],
+            ),
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -48,7 +76,7 @@ class AddressCard extends StatelessWidget {
                 alignment: Alignment.centerLeft,
                 margin: EdgeInsets.only(left: 10.r, right: 15.r),
                 child: Text(
-                  "Work",
+                  addressType,
                   style: TextStyle(
                     fontSize: 14.sp,
                     fontFamily: 'Inter',
@@ -63,10 +91,10 @@ class AddressCard extends StatelessWidget {
                 child: Text(
                   textAlign: TextAlign.justify,
                   overflow: TextOverflow.visible,
-                  "08 Second floor govind kunj, Civil Lines, Raipur",
+                  actualAddress + areaAddress + ", " + landmark,
                   style: TextStyle(
                     fontSize: 14.sp,
-                    fontFamily: 'Inter',
+                    fontFamily: 'Inder',
                     fontWeight: FontWeight.w500,
                   ),
                 ),

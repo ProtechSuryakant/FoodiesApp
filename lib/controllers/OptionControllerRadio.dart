@@ -7,4 +7,11 @@ class OptionController extends GetxController {
     selectedOption.value = option;
     update();
   }
+
+  RxString selectedPayMode = "Cash".obs;
+
+  void changePayMode(String option) {
+    selectedPayMode.value = option;
+    update();
+  }
 }

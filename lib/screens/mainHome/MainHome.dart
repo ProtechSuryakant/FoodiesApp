@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:foodies_app/constants/appTextStyles.dart';
 import 'package:foodies_app/constants/colors.dart';
 import 'package:foodies_app/constants/fontSizes.dart';
+import 'package:foodies_app/screens/mainHome/cart/cartScreen.dart';
 import 'package:foodies_app/screens/mainHome/home/Home.dart';
 import 'package:foodies_app/screens/mainHome/newsBlog/newsandblog.dart';
 import 'package:foodies_app/screens/mainHome/orderDetails/orderDetails.dart';
@@ -19,7 +20,12 @@ class MainHome extends StatefulWidget {
 class _MainHomeState extends State<MainHome> {
   var _currentIndex = 0;
 
-  List<Widget> Pages = [Home(), OrderDetails(), NewsAndBlog()];
+  List<Widget> Pages = [
+    const Home(),
+    const OrderDetails(),
+    const CartScreen(),
+    const NewsAndBlog()
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -50,8 +56,8 @@ class _MainHomeState extends State<MainHome> {
                 _currentIndex = newIndex;
               });
             },
-            destinations: const [
-              NavigationDestination(
+            destinations: [
+              const NavigationDestination(
                   selectedIcon: Icon(
                     CupertinoIcons.home,
                     color: FoodiesColors.accentColor,
@@ -59,13 +65,26 @@ class _MainHomeState extends State<MainHome> {
                   icon: Icon(CupertinoIcons.home),
                   label: "Home"),
               NavigationDestination(
+                  selectedIcon: Image.asset(
+                    'assets/png/shop.png',
+                    color: FoodiesColors.accentColor,
+                    height: 25,
+                    width: 25,
+                  ),
+                  icon: Image.asset(
+                    'assets/png/shop.png',
+                    height: 25,
+                    width: 25,
+                  ),
+                  label: "Order"),
+              const NavigationDestination(
                   selectedIcon: Icon(
-                    CupertinoIcons.list_bullet,
+                    CupertinoIcons.cart,
                     color: FoodiesColors.accentColor,
                   ),
-                  icon: Icon(CupertinoIcons.list_bullet),
-                  label: "Order"),
-              NavigationDestination(
+                  icon: Icon(CupertinoIcons.cart),
+                  label: "Cart"),
+              const NavigationDestination(
                   selectedIcon: Icon(
                     CupertinoIcons.news,
                     color: FoodiesColors.accentColor,

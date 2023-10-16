@@ -16,7 +16,7 @@ class CategoryCard2 extends StatelessWidget {
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
           color: FoodiesColors.cardColor,
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(10.r),
           boxShadow: [
             BoxShadow(
                 blurRadius: 0.2,
@@ -31,18 +31,18 @@ class CategoryCard2 extends StatelessWidget {
             size: 20,
           ),
           SizedBox(
-            width: 5.h,
+            width: 5.w,
           ),
           Text(
             title,
             style: TextStyle(
               fontFamily: "Inder",
-              fontSize: 14,
+              fontSize: 14.sp,
               fontWeight: FontWeight.w600,
             ),
           ),
           SizedBox(
-            width: 5.h,
+            width: 5.w,
           ),
           Icon(
             suffixIcon,

@@ -7,13 +7,12 @@ import 'package:foodies_app/constants/colors.dart';
 class MenuCard extends StatelessWidget {
   final String image;
   final String categoryTitle;
-  final String categoryDetails;
+
   final VoidCallback? function;
   const MenuCard(
       {super.key,
       required this.image,
       required this.categoryTitle,
-      required this.categoryDetails,
       required this.function});
 
   @override
@@ -26,42 +25,32 @@ class MenuCard extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           SizedBox(
-            width: 20.0.h,
+            width: 20.0.w,
           ),
           Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SizedBox(
-                width: 20.h,
-              ),
               Container(
                 alignment: Alignment.center,
                 child: Image.asset(
                   image,
-                  fit: BoxFit.contain,
+                  fit: BoxFit.cover,
                   height: 70.h,
-                  width: 70.h,
+                  width: 70.w,
                 ),
               ),
               Text(
                 categoryTitle,
-                style: const TextStyle(
-                  fontSize: 16,
+                style: TextStyle(
+                  fontSize: 14.sp,
                   fontWeight: FontWeight.bold,
                   fontFamily: 'Inder',
                   color: FoodiesColors.textColor,
                 ),
               ),
               SizedBox(
-                width: 165.h,
-                child: Text(
-                  textAlign: TextAlign.center,
-                  overflow: TextOverflow.visible,
-                  categoryDetails,
-                  style: AppTextStyles.paragraphStyle,
-                ),
-              ),
-              SizedBox(
-                height: 10.h,
+                height: 20.h,
               ),
               InkWell(
                 onTap: () {
@@ -70,16 +59,16 @@ class MenuCard extends StatelessWidget {
                   }
                 },
                 child: Container(
-                  height: h * 0.05,
-                  width: w * 0.3,
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
                       color: FoodiesColors.accentColor,
-                      borderRadius: BorderRadius.circular(10)),
+                      borderRadius: BorderRadius.circular(10.r)),
                   child: Text(
                     "Show Menu",
                     style: TextStyle(
-                        fontSize: 16,
+                        fontSize: 16.sp,
                         fontFamily: 'Inter',
                         fontWeight: FontWeight.bold,
                         color: FoodiesColors.card),
@@ -89,14 +78,8 @@ class MenuCard extends StatelessWidget {
             ],
           ),
           SizedBox(
-            width: 20.h,
+            width: 20.w,
           ),
-          // VerticalDivider(
-          //   indent: 20,
-          //   endIndent: 20,
-          //   color: Colors.grey.withOpacity(0.5),
-          //   thickness: 1,
-          // )
         ],
       ),
     );

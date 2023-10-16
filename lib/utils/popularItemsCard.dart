@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:foodies_app/constants/appTextStyles.dart';
 import 'package:foodies_app/constants/assets.dart';
 import 'package:foodies_app/constants/colors.dart';
+import 'package:foodies_app/controllers/addProductOnListCart.dart';
 import 'package:foodies_app/controllers/favController.dart';
 import 'package:get/get.dart';
 
@@ -36,11 +37,10 @@ class PopularItemCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double w = MediaQuery.of(context).size.width;
-    double h = MediaQuery.of(context).size.height;
     return Container(
-      height: h * 0.35.h,
-      width: w * 0.55.h,
-      margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+      width: w * 0.55.w,
+      margin: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
+      alignment: Alignment.center,
       decoration: BoxDecoration(
           color: FoodiesColors.cardColor,
           borderRadius: BorderRadius.circular(15),
@@ -52,6 +52,8 @@ class PopularItemCard extends StatelessWidget {
                 offset: Offset(0, 0.5))
           ]),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -74,11 +76,11 @@ class PopularItemCard extends StatelessWidget {
                         ))),
               Container(
                 alignment: Alignment.center,
-                margin: const EdgeInsets.only(right: 10),
-                padding: const EdgeInsets.only(left: 5, right: 5),
+                margin: EdgeInsets.only(right: 10.w),
+                padding: EdgeInsets.only(left: 5.w, right: 5.w),
                 decoration: BoxDecoration(
                   color: Colors.white,
-                  borderRadius: BorderRadius.circular(50),
+                  borderRadius: BorderRadius.circular(50.r),
                 ),
                 child: Row(
                   children: [
@@ -97,14 +99,11 @@ class PopularItemCard extends StatelessWidget {
             ],
           ),
           Container(
-            height: h * 0.13.h,
             decoration: const BoxDecoration(),
-            child: Hero(
-              tag: tag,
-              child: Image.asset(
-                AppAssets.pizza_ai1,
-                fit: BoxFit.contain,
-              ),
+            child: Image.asset(
+              AppAssets.pizza_ai1,
+              fit: BoxFit.contain,
+              height: 130.h,
             ),
           ),
           Container(
@@ -112,8 +111,8 @@ class PopularItemCard extends StatelessWidget {
             alignment: Alignment.center,
             child: Text(
               itemTitle,
-              style: const TextStyle(
-                fontSize: 16,
+              style: TextStyle(
+                fontSize: 16.sp,
                 fontWeight: FontWeight.bold,
                 fontFamily: 'Inder',
                 color: FoodiesColors.textColor,
@@ -123,29 +122,36 @@ class PopularItemCard extends StatelessWidget {
           Container(
             alignment: Alignment.center,
             child: Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: EdgeInsets.all(8.0.w),
               child: Text(
-                overflow: TextOverflow.visible,
+                overflow: TextOverflow.ellipsis,
                 textAlign: TextAlign.center,
                 itemDetails,
-                style: AppTextStyles.paragraphStyle,
+                style: TextStyle(
+                  fontSize: 12.sp,
+                  fontFamily: 'Inter',
+                  color: FoodiesColors.textColor,
+                ),
               ),
             ),
           ),
           Container(
-            margin: const EdgeInsets.only(top: 5),
+            margin: EdgeInsets.only(top: 5.h),
             alignment: Alignment.center,
             child: Text(
               overflow: TextOverflow.visible,
               textAlign: TextAlign.center,
               "₹ $itemPrice",
               style: TextStyle(
-                fontSize: 16.h,
+                fontSize: 14.sp,
                 fontWeight: FontWeight.bold,
                 fontFamily: 'Inder',
                 color: FoodiesColors.accentColor,
               ),
             ),
+          ),
+          SizedBox(
+            height: 10.h,
           )
         ],
       ),

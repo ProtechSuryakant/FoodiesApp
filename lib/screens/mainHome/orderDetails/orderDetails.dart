@@ -1,11 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:foodies_app/constants/assets.dart';
 import 'package:foodies_app/constants/colors.dart';
 import 'package:foodies_app/constants/fontSizes.dart';
-import 'package:foodies_app/constants/words.dart';
+import 'package:foodies_app/data/models/orderHistoryDataModal.dart';
 import 'package:foodies_app/utils/orderHistoryCard.dart';
 
 class OrderDetails extends StatefulWidget {
@@ -19,7 +17,6 @@ class _OrderDetailsState extends State<OrderDetails> {
   @override
   Widget build(BuildContext context) {
     double h = MediaQuery.of(context).size.height;
-    double w = MediaQuery.of(context).size.width;
     return Scaffold(
       body: SafeArea(
         child: CustomScrollView(
@@ -45,20 +42,20 @@ class _OrderDetailsState extends State<OrderDetails> {
             ),
             SliverList.builder(
               itemBuilder: (BuildContext context, int index) {
-                return const OrderHistoryCard(
-                    image: AppAssets.coleslaw,
-                    address: "Foodies 04, Raipur",
-                    status: "Status",
-                    btnColor: Colors.green,
-                    qty: 3,
-                    size: "Regular",
-                    date: "20 Sep, 2023 at 8:00PM",
-                    price: 199.0,
-                    rating: 4.5,
-                    title: "La pino de pizza",
-                    txtColor: Colors.white);
+                print(
+                  orderHistoryData[index].orderId,
+                );
+                return OrderHistoryCard(
+                  status: orderHistoryData[index].status,
+                  totalQty: orderHistoryData[index].totalQty,
+                  dateTime: orderHistoryData[index].dateTime,
+                  totalPrice: orderHistoryData[index].totalPrice,
+                  rating: orderHistoryData[index].rating,
+                  orderAddress: orderHistoryData[index].orderAddress,
+                  orderId: orderHistoryData[index].orderId,
+                );
               },
-              itemCount: 10,
+              itemCount: orderHistoryData.length,
             )
           ],
         ),
@@ -90,7 +87,7 @@ class MyPersistentHeaderDelegate extends SliverPersistentHeaderDelegate {
             child: TextFormField(
               style: const TextStyle(fontSize: FontSize.mediumBodyText),
               decoration: InputDecoration(
-                  hintText: "Search here.....",
+                  hintText: "Search here",
                   border: InputBorder.none,
                   focusColor: FoodiesColors.textColor,
                   prefixIcon: const Icon(
