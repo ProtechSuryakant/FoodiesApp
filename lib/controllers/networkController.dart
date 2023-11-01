@@ -2,6 +2,7 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:foodies_app/constants/appMessages.dart';
 import 'package:foodies_app/constants/fontSizes.dart';
+import 'package:foodies_app/widgtes/notNetwork.dart';
 import 'package:get/get.dart';
 
 class NetworkController extends GetxController {

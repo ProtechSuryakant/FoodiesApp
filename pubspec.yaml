@@ -27,6 +27,7 @@ dependencies:
   flutter_rating_bar: ^4.0.1
   intl:
   video_player: ^2.7.2
+  http: ^1.1.0
 
 
 dev_dependencies:
@@ -44,6 +45,7 @@ flutter:
     - assets/png/
     - assets/images/samplevideo.mp4
     - assets/gifs/
+    - assets/allfood/
   fonts:
     - family: Bauhaus
       fonts:

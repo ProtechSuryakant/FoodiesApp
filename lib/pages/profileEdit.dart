@@ -1,11 +1,14 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:foodies_app/constants/appTextStyles.dart';
 import 'package:foodies_app/constants/colors.dart';
+import 'package:foodies_app/controllers/EditProfileController.dart';
 import 'package:foodies_app/controllers/datePickerController.dart';
+import 'package:foodies_app/controllers/getUsersController.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
+import 'package:get_storage/get_storage.dart';
 
 class ProfileEdit extends StatefulWidget {
   const ProfileEdit({super.key});
@@ -15,28 +18,66 @@ class ProfileEdit extends StatefulWidget {
 }
 
 class _ProfileEditState extends State<ProfileEdit> {
-  late int selectedRadio;
+  late String selectedRadio;
+
+  bool isReadOnlyNumber = true;
+  bool isReadOnlyEmail = false;
+
+  final TextEditingController _fullNameController = TextEditingController();
+  TextEditingController mobileNumberController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+
+  final EditProfileController _editProfileController =
+      Get.put(EditProfileController());
+  final GetUserController getUserController = Get.put(GetUserController());
+
+  late String? fullName;
+  late String mobile;
+  late String? email;
+  late String? dob;
+  late String? gender;
 
   @override
   void initState() {
     super.initState();
-    selectedRadio = 0;
+    getUserController.getAllUsers(context);
+    _fullNameController.text = userOne['fullName'];
+    mobileNumberController.text = userOne['mobileNumber'];
+    _emailController.text = userOne['email'];
+    dob = userOne['dob'];
+    if (userOne['gender'] == "") {
+      selectedRadio = 'Male';
+    } else {
+      selectedRadio = userOne['gender'];
+    }
   }
 
-  setSelectedRadio(int val) {
+  selectGender(String value) {
     setState(() {
-      selectedRadio = val;
+      selectedRadio = value;
     });
   }
 
-  static DateTime selectedDate = DateTime.now();
-  final DatePickerController __datePickercontroller =
-      Get.put(DatePickerController());
+  @override
+  void dispose() {
+    mobileNumberController.dispose();
+    _emailController.dispose();
+    _fullNameController.dispose();
+    getUserController.dispose();
+    super.dispose();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+  }
+
+  final __datePickercontroller = Get.put(DatePickerController());
 
   @override
   Widget build(BuildContext context) {
     double h = MediaQuery.of(context).size.height;
-    double w = MediaQuery.of(context).size.width;
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: FoodiesColors.cardBackground,
@@ -55,12 +96,16 @@ class _ProfileEditState extends State<ProfileEdit> {
           ),
           Container(
             padding: EdgeInsets.symmetric(horizontal: 10.r, vertical: 10.r),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10.r),
+            ),
             child: TextFormField(
-              initialValue: "Surya",
+              // initialValue: fullName ?? "Enter your name",
+              controller: _fullNameController,
               decoration: InputDecoration(
-                  label: Text(
-                    "Fullname",
-                    style: TextStyle(color: Colors.black),
+                  label: const Text(
+                    "Full Name",
+                    style: TextStyle(color: FoodiesColors.textColor),
                   ),
                   hintText: "Full Name",
                   suffixIcon: IconButton(
@@ -80,44 +125,47 @@ class _ProfileEditState extends State<ProfileEdit> {
             ),
           ),
           Container(
-            padding: EdgeInsets.symmetric(horizontal: 10.r, vertical: 10.r),
-            child: TextFormField(
-              initialValue: "7869308919",
-              keyboardType: TextInputType.number,
-              maxLength: 10,
-              readOnly: true,
-              onTap: () {
-                print("Mobile");
-              },
-              decoration: InputDecoration(
-                  hintStyle: const TextStyle(color: FoodiesColors.textColor),
-                  label: const Text(
-                    "Mobile",
-                    style: TextStyle(color: Colors.black),
-                  ),
-                  counterText: "",
-                  hintText: "Mobile",
-                  suffixText: "Change",
-                  suffixStyle: TextStyle(
-                      color: FoodiesColors.accentColor,
-                      fontWeight: FontWeight.w400,
-                      fontSize: 16.sp),
-                  enabledBorder: const OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.black)),
-                  disabledBorder: const OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.black)),
-                  focusedBorder: const OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.black)),
-                  errorBorder: const OutlineInputBorder(
-                      borderSide:
-                          BorderSide(color: FoodiesColors.accentColor))),
-            ),
-          ),
+              padding: EdgeInsets.symmetric(horizontal: 10.r, vertical: 10.r),
+              child: TextFormField(
+                controller: mobileNumberController,
+                // initialValue: ,
+                keyboardType: TextInputType.number,
+                maxLength: 10,
+                readOnly: isReadOnlyNumber,
+                onTap: () {
+                  print("Mobile");
+                },
+                decoration: InputDecoration(
+                    hintStyle: const TextStyle(color: FoodiesColors.textColor),
+                    label: const Text(
+                      "Mobile",
+                      style: TextStyle(color: Colors.black),
+                    ),
+                    counterText: "",
+                    hintText: "Mobile",
+                    suffixText: "Change",
+                    suffixStyle: TextStyle(
+                        color: FoodiesColors.accentColor,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 16.sp),
+                    enabledBorder: const OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.black)),
+                    disabledBorder: const OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.black)),
+                    focusedBorder: const OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.black)),
+                    errorBorder: const OutlineInputBorder(
+                        borderSide:
+                            BorderSide(color: FoodiesColors.accentColor))),
+              )),
           Container(
             padding: EdgeInsets.symmetric(horizontal: 10.r, vertical: 10.r),
+            decoration:
+                BoxDecoration(borderRadius: BorderRadius.circular(10.r)),
             child: TextFormField(
-              initialValue: "surya@gmail.com",
-              readOnly: true,
+              // initialValue: _email,
+              readOnly: isReadOnlyEmail,
+              controller: _emailController,
               keyboardType: TextInputType.emailAddress,
               onTap: () {
                 print("Email Clicked");
@@ -128,7 +176,7 @@ class _ProfileEditState extends State<ProfileEdit> {
                     style: TextStyle(color: Colors.black),
                   ),
                   hintText: "Email",
-                  suffixText: "Change",
+                  suffixText: isReadOnlyEmail ? "Change" : "",
                   suffixStyle: TextStyle(
                       color: FoodiesColors.accentColor,
                       fontWeight: FontWeight.w400,
@@ -145,7 +193,9 @@ class _ProfileEditState extends State<ProfileEdit> {
           Container(
             margin: EdgeInsets.symmetric(horizontal: 10.r, vertical: 10.r),
             padding: EdgeInsets.symmetric(horizontal: 10.r, vertical: 5.r),
-            decoration: BoxDecoration(border: Border.all(width: 1)),
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(5.r),
+                border: Border.all(width: 1)),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -160,12 +210,12 @@ class _ProfileEditState extends State<ProfileEdit> {
                       TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w400),
                 ),
                 Radio(
-                  value: 1,
+                  value: 'Male',
                   groupValue: selectedRadio,
                   activeColor: FoodiesColors.accentColor,
                   onChanged: (val) {
+                    selectGender(val!);
                     print("Radio $val");
-                    setSelectedRadio(val!);
                   },
                 ),
                 Text(
@@ -174,21 +224,22 @@ class _ProfileEditState extends State<ProfileEdit> {
                       TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w400),
                 ),
                 Radio(
-                  value: 2,
-                  groupValue: selectedRadio,
-                  activeColor: FoodiesColors.accentColor,
-                  onChanged: (val) {
-                    print("Radio $val");
-                    setSelectedRadio(val!);
-                  },
-                ),
+                    value: 'Female',
+                    groupValue: selectedRadio,
+                    activeColor: FoodiesColors.accentColor,
+                    onChanged: (val) {
+                      selectGender(val!);
+                      print("Radio $val");
+                    }),
               ],
             ),
           ),
           Container(
             margin: EdgeInsets.symmetric(horizontal: 10.r, vertical: 10.r),
             padding: EdgeInsets.symmetric(horizontal: 10.r, vertical: 5.r),
-            decoration: BoxDecoration(border: Border.all(width: 1)),
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(5.r),
+                border: Border.all(width: 1)),
             child: Row(
               children: [
                 Text(
@@ -199,13 +250,11 @@ class _ProfileEditState extends State<ProfileEdit> {
                 SizedBox(
                   width: 20.w,
                 ),
-                Obx(
-                  () => Text(
-                    __datePickercontroller.formattedDate.value,
-                    style: TextStyle(
-                        color: FoodiesColors.textColor.withOpacity(0.7),
-                        fontSize: h * 0.020.h),
-                  ),
+                Text(
+                  __datePickercontroller.formattedDate.value,
+                  style: TextStyle(
+                      color: FoodiesColors.textColor.withOpacity(0.7),
+                      fontSize: h * 0.020.h),
                 ),
                 const Spacer(),
                 IconButton(
@@ -220,6 +269,34 @@ class _ProfileEditState extends State<ProfileEdit> {
             ),
           ),
           InkWell(
+            onTap: () {
+              if (_fullNameController.text.isEmpty) {
+                AwesomeDialog(
+                        context: context,
+                        dialogType: DialogType.warning,
+                        animType: AnimType.topSlide,
+                        title: "Warning",
+                        titleTextStyle: const TextStyle(
+                            color: Color(0xFF293265),
+                            fontSize: 25,
+                            fontWeight: FontWeight.bold),
+                        desc: "Please enter full Name",
+                        descTextStyle: const TextStyle(fontSize: 18),
+                        btnOkOnPress: () {
+                          Get.obs();
+                        },
+                        btnOkColor: FoodiesColors.accentColor)
+                    .show();
+              } else {
+                _editProfileController.EditProfile(
+                    _fullNameController.text,
+                    _emailController.text,
+                    selectedRadio,
+                    __datePickercontroller.formattedDate.value,
+                    mobileNumberController.text,
+                    context);
+              }
+            },
             child: Container(
               alignment: Alignment.center,
               margin: EdgeInsets.symmetric(horizontal: 10.r),

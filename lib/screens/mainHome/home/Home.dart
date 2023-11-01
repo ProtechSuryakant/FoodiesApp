@@ -1,4 +1,3 @@
-import 'package:carousel_slider/carousel_controller.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +8,11 @@ import 'package:foodies_app/constants/appTextStyles.dart';
 import 'package:foodies_app/constants/assets.dart';
 import 'package:foodies_app/constants/colors.dart';
 import 'package:foodies_app/constants/fontSizes.dart';
+import 'package:foodies_app/controllers/offerListController.dart';
+import 'package:foodies_app/controllers/orderQntyBtn.dart';
+import 'package:foodies_app/controllers/productAddButton.dart';
 import 'package:foodies_app/controllers/timePickerController.dart';
+import 'package:foodies_app/data/models/offerDataModal.dart';
 import 'package:foodies_app/skeleton/homeSkaleton.dart';
 
 import 'package:foodies_app/widgtes/categoryList.dart';
@@ -42,10 +45,21 @@ class _HomeState extends State<Home> {
 
   bool isLoading = true;
 
-  // List<MenuData> data = [];
   Future getData() async {
     await Future.delayed(const Duration(seconds: 2));
     isLoading = false;
+  }
+
+  final OrderQtyBtn _orderQtyBtn = Get.put(OrderQtyBtn());
+  // final token = box.read('access'); _
+
+  final AddProductButton _addProductButton = Get.put(AddProductButton());
+  final OfferController _offerController = Get.put(OfferController());
+
+  @override
+  void initState() {
+    _offerController.fetchOfferData(context);
+    super.initState();
   }
 
   @override
@@ -145,7 +159,7 @@ class _HomeState extends State<Home> {
                             const Spacer(),
                             InkWell(
                               onTap: () {
-                                showBottomSheet(
+                                showModalBottomSheet(
                                   context: context,
                                   backgroundColor: Colors.transparent,
                                   builder: (context) {
@@ -197,155 +211,91 @@ class _HomeState extends State<Home> {
                       pinned: true,
                     ),
                     SliverToBoxAdapter(
-                      child: Container(
-                        alignment: Alignment.centerLeft,
-                        padding: EdgeInsets.only(
-                          right: 10.r,
-                        ),
-                        child: SingleChildScrollView(
-                          scrollDirection: Axis.horizontal,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Container(
-                                  alignment: Alignment.centerLeft,
-                                  margin: const EdgeInsets.all(10),
-                                  child: SingleChildScrollView(
-                                    scrollDirection: Axis.horizontal,
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
-                                      children: [
-                                        Container(
-                                          padding: const EdgeInsets.all(10),
-                                          decoration: BoxDecoration(
-                                              color: FoodiesColors.cardColor,
-                                              borderRadius:
-                                                  BorderRadius.circular(15),
-                                              boxShadow: [
-                                                BoxShadow(
-                                                    blurRadius: 0.2,
-                                                    spreadRadius: 0.2,
-                                                    color: Colors.black
-                                                        .withOpacity(0.3),
-                                                    offset:
-                                                        const Offset(0, 0.5))
-                                              ]),
-                                          child: Row(
-                                            children: [
-                                              Image(
-                                                image: const AssetImage(
-                                                    AppAssets.offer1),
-                                                fit: BoxFit.contain,
-                                                height: 40.h,
-                                                width: 40.h,
-                                              ),
-                                              const Text("  Cheese Burger",
-                                                  style: TextStyle(
-                                                      fontFamily: 'Inder',
-                                                      fontSize: 14,
-                                                      fontWeight:
-                                                          FontWeight.w600))
-                                            ],
+                        child: Obx(
+                      () => Container(
+                          height: 70.h,
+                          alignment: Alignment.centerLeft,
+                          child: ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: _offerController.allOfferData.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              var offerItemData =
+                                  _offerController.allOfferData[index];
+                              // print(offerItemData);
+                              return Padding(
+                                padding: const EdgeInsets.all(10.0),
+                                child: Container(
+                                  padding: const EdgeInsets.all(10),
+                                  decoration: BoxDecoration(
+                                    color: FoodiesColors.cardColor,
+                                    borderRadius: BorderRadius.circular(15),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        blurRadius: 0.2,
+                                        spreadRadius: 0.2,
+                                        color: Colors.black.withOpacity(0.3),
+                                        offset: const Offset(0, 0.5),
+                                      ),
+                                    ],
+                                  ),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      SizedBox(
+                                        height: 60.h,
+                                        width: 60.w,
+                                        // child: Image.network(
+                                        //   offerItemData['image'].toString(),
+                                        //   errorBuilder: (
+                                        //     context,
+                                        //     error,
+                                        //     stackTrace,
+                                        //   ) {
+                                        //     return const CircleAvatar(
+                                        //       backgroundColor:
+                                        //           FoodiesColors.accentColor,
+                                        //       child: Icon(
+                                        //         Icons.close,
+                                        //         color: Colors.white,
+                                        //       ),
+                                        //     );
+                                        // },
+
+                                        // ),
+                                        child: const CircleAvatar(
+                                          backgroundColor:
+                                              FoodiesColors.accentColor,
+                                          child: Icon(
+                                            Icons.close,
+                                            color: Colors.white,
                                           ),
                                         ),
-                                        SizedBox(
-                                          width: 10.h,
+                                      ),
+                                      SizedBox(width: 10.w),
+                                      Text(
+                                        offerItemData['title'],
+                                        style: TextStyle(
+                                          fontFamily: 'Inder',
+                                          fontSize: 14.sp,
+                                          fontWeight: FontWeight.w600,
                                         ),
-                                        Container(
-                                          padding: const EdgeInsets.all(10),
-                                          decoration: BoxDecoration(
-                                              color: FoodiesColors.cardColor,
-                                              borderRadius:
-                                                  BorderRadius.circular(15),
-                                              boxShadow: [
-                                                BoxShadow(
-                                                    blurRadius: 0.2,
-                                                    spreadRadius: 0.2,
-                                                    color: Colors.black
-                                                        .withOpacity(0.3),
-                                                    offset:
-                                                        const Offset(0, 0.5))
-                                              ]),
-                                          child: Row(
-                                            children: [
-                                              SizedBox(
-                                                width: 10.h,
-                                              ),
-                                              Image(
-                                                image: const AssetImage(
-                                                    AppAssets.offer4),
-                                                fit: BoxFit.contain,
-                                                height: 40.h,
-                                                width: 40.h,
-                                              ),
-                                              const Text("  Corn Pizza",
-                                                  style: TextStyle(
-                                                      fontFamily: 'Inder',
-                                                      fontSize: 14,
-                                                      fontWeight:
-                                                          FontWeight.w600))
-                                            ],
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          width: 10.h,
-                                        ),
-                                        Container(
-                                          padding: const EdgeInsets.all(10),
-                                          decoration: BoxDecoration(
-                                              color: FoodiesColors.cardColor,
-                                              borderRadius:
-                                                  BorderRadius.circular(15),
-                                              boxShadow: [
-                                                BoxShadow(
-                                                    blurRadius: 0.2,
-                                                    spreadRadius: 0.2,
-                                                    color: Colors.black
-                                                        .withOpacity(0.3),
-                                                    offset:
-                                                        const Offset(0, 0.5))
-                                              ]),
-                                          child: Row(
-                                            children: [
-                                              SizedBox(
-                                                width: 10.h,
-                                              ),
-                                              Image(
-                                                image: const AssetImage(
-                                                    AppAssets.offer2),
-                                                fit: BoxFit.contain,
-                                                height: 40.h,
-                                                width: 40.h,
-                                              ),
-                                              const Text("  Paneer Pizza",
-                                                  style: TextStyle(
-                                                      fontFamily: 'Inder',
-                                                      fontSize: 14,
-                                                      fontWeight:
-                                                          FontWeight.w600))
-                                            ],
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          width: 10.h,
-                                        ),
-                                      ],
-                                    ),
-                                  )),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            },
+                          )),
+                    )),
                     SliverToBoxAdapter(
                       child: Container(
-                        margin: EdgeInsets.symmetric(horizontal: 10),
+                        margin: EdgeInsets.symmetric(horizontal: 10.w),
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15.0),
+                          borderRadius: BorderRadius.circular(15.0.r),
                           boxShadow: [
                             BoxShadow(
-                              color: Colors.black.withOpacity(0.2),
+                              color: Colors.black.withOpacity(0.2.r),
                               blurRadius: 5.0,
                               spreadRadius: 2.0,
                             ),
@@ -394,7 +344,7 @@ class _HomeState extends State<Home> {
                     ),
                     SliverToBoxAdapter(
                       child: Container(
-                        margin: const EdgeInsets.only(left: 15, bottom: 10),
+                        margin: EdgeInsets.only(left: 15.w, bottom: 10.h),
                         alignment: Alignment.centerLeft,
                         child: const Text(
                           "Foodies Menus",
@@ -437,11 +387,13 @@ class _HomeState extends State<Home> {
                         ),
                       ),
                     ),
-                    const SliverToBoxAdapter(
-                      child: CategoryList(),
+                    SliverToBoxAdapter(
+                      child: SizedBox(
+                        height: 10.h,
+                      ),
                     ),
                     const SliverToBoxAdapter(
-                      child: CategoryList2(),
+                      child: CategoryList(),
                     ),
                     SliverToBoxAdapter(
                       child: SizedBox(
@@ -475,12 +427,69 @@ class _HomeState extends State<Home> {
                         ),
                       ),
                     ),
-                    const ProductList()
+                    SliverToBoxAdapter(
+                      child: SizedBox(
+                        height: 10.h,
+                      ),
+                    ),
+                    const SliverToBoxAdapter(
+                      child: CategoryList2(),
+                    ),
+                    const ProductList(),
+                    SliverToBoxAdapter(
+                      child: SizedBox(
+                        height: 10.h,
+                      ),
+                    ),
                   ],
                 );
               }
             }),
       ),
+      bottomNavigationBar: _orderQtyBtn.totalQty > 0
+          ? InkWell(
+              onTap: () {
+                Get.toNamed(AppRoutes.cartScreen);
+                print(_addProductButton.tempProductData);
+                print(_orderQtyBtn.quantities);
+              },
+              child: Container(
+                height: 60.h,
+                color: FoodiesColors.accentColor,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Obx(
+                      () => Text(
+                        _orderQtyBtn.totalQty.toString(),
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 16.sp,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: "Inter"),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 5.w,
+                    ),
+                    Text(
+                      "Add to cart",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: "Inter"),
+                    ),
+                    Icon(
+                      CupertinoIcons.forward,
+                      size: 18.sp,
+                      color: Colors.white,
+                    )
+                  ],
+                ),
+              ),
+            )
+          : const SizedBox.shrink(),
     );
   }
 
@@ -495,11 +504,10 @@ class _HomeState extends State<Home> {
       '8 People'
     ];
 
-    final DatePickerController __datePickercontroller =
+    final DatePickerController datePickercontroller =
         Get.put(DatePickerController());
-    final TimePickerController _timePickerController =
+    final TimePickerController timePickerController =
         Get.put(TimePickerController());
-    TimeOfDay selectedTime = TimeOfDay.now();
 
     String _formatTime(TimeOfDay time) {
       final now = DateTime.now();
@@ -574,8 +582,10 @@ class _HomeState extends State<Home> {
                             width: w.w,
                             alignment: Alignment.centerLeft,
                             padding: EdgeInsets.only(left: 10.r),
-                            margin: EdgeInsets.symmetric(horizontal: 30.r),
-                            color: FoodiesColors.cardColor,
+                            margin: EdgeInsets.symmetric(horizontal: 10.r),
+                            decoration: BoxDecoration(
+                                color: FoodiesColors.cardColor,
+                                borderRadius: BorderRadius.circular(10.r)),
                             child: Row(
                               children: [
                                 const Icon(
@@ -614,14 +624,15 @@ class _HomeState extends State<Home> {
                               ],
                             )),
                         InkWell(
-                          onTap: () => __datePickercontroller.showDatePicker(),
+                          onTap: () => datePickercontroller.showDatePicker(),
                           child: Container(
                               padding: EdgeInsets.symmetric(
                                   horizontal: 10.w, vertical: 15.h),
                               margin: EdgeInsets.symmetric(
-                                  horizontal: 30.w, vertical: 10.h),
-                              decoration: const BoxDecoration(
-                                  color: FoodiesColors.cardColor),
+                                  horizontal: 10.w, vertical: 10.h),
+                              decoration: BoxDecoration(
+                                  color: FoodiesColors.cardColor,
+                                  borderRadius: BorderRadius.circular(10.r)),
                               child: Row(
                                 children: [
                                   const Icon(
@@ -633,8 +644,7 @@ class _HomeState extends State<Home> {
                                   ),
                                   Obx(
                                     () => Text(
-                                      __datePickercontroller
-                                          .formattedDate.value,
+                                      datePickercontroller.formattedDate.value,
                                       style: TextStyle(
                                           color: FoodiesColors.textColor
                                               .withOpacity(0.7),
@@ -656,11 +666,12 @@ class _HomeState extends State<Home> {
                         ),
                         Container(
                             margin: EdgeInsets.symmetric(
-                              horizontal: 30.w,
+                              horizontal: 10.w,
                             ),
                             padding: EdgeInsets.only(left: 10.w),
-                            decoration: const BoxDecoration(
-                                color: FoodiesColors.cardColor),
+                            decoration: BoxDecoration(
+                                color: FoodiesColors.cardColor,
+                                borderRadius: BorderRadius.circular(10.r)),
                             child: Row(
                               children: [
                                 const Icon(
@@ -672,7 +683,7 @@ class _HomeState extends State<Home> {
                                 ),
                                 Obx(
                                   () => Text(
-                                    _formatTime(_timePickerController
+                                    _formatTime(timePickerController
                                         .selectedTime.value),
                                     style: TextStyle(
                                         color: FoodiesColors.textColor
@@ -685,11 +696,11 @@ class _HomeState extends State<Home> {
                                     onPressed: () async {
                                       final pickedTime = await showTimePicker(
                                         context: context,
-                                        initialTime: _timePickerController
+                                        initialTime: timePickerController
                                             .selectedTime.value,
                                       );
                                       if (pickedTime != null) {
-                                        _timePickerController
+                                        timePickerController
                                             .setTime(pickedTime);
                                         print(pickedTime.format(context));
                                       }
@@ -706,11 +717,12 @@ class _HomeState extends State<Home> {
                             alignment: Alignment.center,
                             width: w.w,
                             margin: EdgeInsets.symmetric(
-                                horizontal: 30.w, vertical: 10.h),
+                                horizontal: 10.w, vertical: 10.h),
                             padding: EdgeInsets.only(
                                 left: 10.w, top: 10.h, bottom: 10.h),
-                            decoration: const BoxDecoration(
-                                color: FoodiesColors.accentColor),
+                            decoration: BoxDecoration(
+                                color: FoodiesColors.accentColor,
+                                borderRadius: BorderRadius.circular(10.r)),
                             child: Text(
                               "Book",
                               style: TextStyle(

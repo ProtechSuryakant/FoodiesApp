@@ -42,92 +42,94 @@ class _OnBoardScreenState extends State<OnBoardScreen> {
         return Scaffold(
           resizeToAvoidBottomInset: true,
           body: SafeArea(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                SizedBox(
-                  height: h * 0.7.h,
-                  child: PageView(
-                    controller: _pageController,
-                    onPageChanged: (int index) {
-                      setState(() {
-                        _pageIndex = index;
-                        if (_pageIndex == 2) {
-                          btnTitle.value = "Get Started";
-                        } else {
-                          btnTitle.value = "Continue";
-                        }
-                      });
-                    },
-                    children: pages,
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SizedBox(
+                    height: h * 0.7.h,
+                    child: PageView(
+                      controller: _pageController,
+                      onPageChanged: (int index) {
+                        setState(() {
+                          _pageIndex = index;
+                          if (_pageIndex == 2) {
+                            btnTitle.value = "Get Started";
+                          } else {
+                            btnTitle.value = "Continue";
+                          }
+                        });
+                      },
+                      children: pages,
+                    ),
                   ),
-                ),
-                SizedBox(
-                  height: 10.h,
-                ),
-                Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                  ...List.generate(
-                    3,
-                    (index) => Padding(
-                      padding: EdgeInsets.only(right: w * 0.02),
-                      child: DotIndicator(
-                        isActive: index == _pageIndex,
+                  SizedBox(
+                    height: 10.h,
+                  ),
+                  Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                    ...List.generate(
+                      3,
+                      (index) => Padding(
+                        padding: EdgeInsets.only(right: w * 0.02),
+                        child: DotIndicator(
+                          isActive: index == _pageIndex,
+                        ),
+                      ),
+                    ),
+                  ]),
+                  SizedBox(
+                    height: 10.h,
+                  ),
+                  Container(
+                    width: w.w,
+                    height: 50.h,
+                    margin: EdgeInsets.symmetric(
+                      horizontal: 30.w,
+                      vertical: 10.h,
+                    ),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(40.r),
+                    ),
+                    child: ElevatedButton(
+                      onPressed: () {
+                        _pageController.nextPage(
+                          duration: const Duration(milliseconds: 300),
+                          curve: Curves.ease,
+                        );
+                        if (_pageIndex == 2) {
+                          Get.offNamed(AppRoutes.loginNumber);
+                        }
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: FoodiesColors.accentColor,
+                      ),
+                      child: Obx(() => Text(
+                            btnTitle.value,
+                            style: TextStyle(
+                              fontSize: 22.sp,
+                              fontFamily: 'Inter',
+                              fontWeight: FontWeight.bold,
+                            ),
+                          )),
+                    ),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      Get.offNamed(AppRoutes.loginNumber);
+                    },
+                    child: Text(
+                      "Skip",
+                      style: TextStyle(
+                        fontSize: 20.sp,
+                        color: Colors.black.withOpacity(0.5),
                       ),
                     ),
                   ),
-                ]),
-                SizedBox(
-                  height: 10.h,
-                ),
-                Container(
-                  width: w.w,
-                  height: 50.h,
-                  margin: EdgeInsets.symmetric(
-                    horizontal: 30.w,
-                    vertical: 10.h,
+                  SizedBox(
+                    height: 50.h,
                   ),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(40.r),
-                  ),
-                  child: ElevatedButton(
-                    onPressed: () {
-                      _pageController.nextPage(
-                        duration: const Duration(milliseconds: 300),
-                        curve: Curves.ease,
-                      );
-                      if (_pageIndex == 2) {
-                        Get.offNamed(AppRoutes.loginNumber);
-                      }
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: FoodiesColors.accentColor,
-                    ),
-                    child: Obx(() => Text(
-                          btnTitle.value,
-                          style: TextStyle(
-                            fontSize: 22.sp,
-                            fontFamily: 'Inter',
-                            fontWeight: FontWeight.bold,
-                          ),
-                        )),
-                  ),
-                ),
-                TextButton(
-                  onPressed: () {
-                    Get.offNamed(AppRoutes.loginNumber);
-                  },
-                  child: Text(
-                    "Skip",
-                    style: TextStyle(
-                      fontSize: 20.sp,
-                      color: Colors.black.withOpacity(0.5),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 50.h,
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         );

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:foodies_app/app/routes/routes.dart';
 import 'package:foodies_app/constants/appTextStyles.dart';
 import 'package:foodies_app/constants/assets.dart';
 import 'package:foodies_app/constants/colors.dart';
@@ -221,21 +222,26 @@ class _FoodDetailsState extends State<FoodDetails> {
               SizedBox(
                 width: 5.w,
               ),
-              Container(
-                height: 60.h,
-                width: 150.w,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  border:
-                      Border.all(color: FoodiesColors.accentColor, width: 2),
-                ),
-                child: Text(
-                  "Add to card",
-                  style: TextStyle(
-                      color: FoodiesColors.accentColor,
-                      fontSize: 16.sp,
-                      fontWeight: FontWeight.w500),
+              InkWell(
+                onTap: () {
+                  Get.toNamed(AppRoutes.cartScreen);
+                },
+                child: Container(
+                  height: 60.h,
+                  width: 150.w,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                    border:
+                        Border.all(color: FoodiesColors.accentColor, width: 2),
+                  ),
+                  child: Text(
+                    "Add to card",
+                    style: TextStyle(
+                        color: FoodiesColors.accentColor,
+                        fontSize: 16.sp,
+                        fontWeight: FontWeight.w500),
+                  ),
                 ),
               ),
             ],

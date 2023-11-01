@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:foodies_app/app/routes/routes.dart';
 import 'package:foodies_app/app/theme/themes.dart';
-import 'package:foodies_app/controllers/dependencyInjection.dart';
+import 'package:foodies_app/controllers/checkNetworkController.dart';
+import 'package:foodies_app/controllers/themeControllers.dart';
 import 'package:foodies_app/pages/aboutus.dart';
 import 'package:foodies_app/pages/addressbook..dart';
 import 'package:foodies_app/pages/checkOutPage.dart';
@@ -13,6 +14,7 @@ import 'package:foodies_app/pages/onboardScreen.dart';
 import 'package:foodies_app/pages/profileEdit.dart';
 import 'package:foodies_app/pages/splashScreeen.dart';
 import 'package:foodies_app/pages/support.dart';
+import 'package:foodies_app/pages/themeButton.dart';
 import 'package:foodies_app/pages/unknownScreen.dart';
 import 'package:foodies_app/screens/auth/changePassword.dart';
 import 'package:foodies_app/screens/auth/forgot.dart';
@@ -34,6 +36,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init();
   runApp(const MyApp());
+  Get.put(ThemeControllers());
   DependencyInjection.init();
 }
 
@@ -44,6 +47,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ThemeControllers themeController = Get.put(ThemeControllers());
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     return ScreenUtilInit(
       designSize: const Size(375, 815),
@@ -52,6 +56,10 @@ class MyApp extends StatelessWidget {
       builder: (_, child) {
         return GetMaterialApp(
           theme: lightTheme,
+          darkTheme: ThemeData(
+            brightness: Brightness.dark,
+          ),
+          themeMode: themeController.themeMode,
           debugShowCheckedModeBanner: false,
           initialRoute: AppRoutes.splash,
           defaultTransition: Transition.rightToLeft,
@@ -111,9 +119,7 @@ class MyApp extends StatelessWidget {
                 name: AppRoutes.otpVerification,
                 page: () => const OTPVerification()),
             GetPage(
-              name: AppRoutes.forgotPass,
-              page: () => const ForgotPassword(),
-            ),
+                name: AppRoutes.forgotPass, page: () => const ForgotPassword()),
             GetPage(
               name: AppRoutes.forgotOtp,
               page: () => const ForgotOtp(),
@@ -137,6 +143,10 @@ class MyApp extends StatelessWidget {
             GetPage(
               name: AppRoutes.foodDetails,
               page: () => const FoodDetails(),
+            ),
+            GetPage(
+              name: AppRoutes.themeChange,
+              page: () => const ThemeChangeButton(),
             ),
           ],
           unknownRoute: GetPage(

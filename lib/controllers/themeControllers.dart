@@ -1,19 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:foodies_app/constants/colors.dart';
 import 'package:get/get.dart';
 
 class ThemeControllers extends GetxController {
-  var isDark = false;
+  var _themeMode = ThemeMode.light;
 
-  void changeTheme(state) {
-    if (state == true) {
-      isDark = true;
-      Get.changeTheme(ThemeData.dark());
-    } else {
-      isDark = false;
-      Get.changeTheme(ThemeData.light()
-          .copyWith(scaffoldBackgroundColor: FoodiesColors.backgroundColor));
-    }
+  ThemeMode get themeMode => _themeMode;
+
+  void setTheme(themeMode) {
+    _themeMode = themeMode;
     update();
   }
 }

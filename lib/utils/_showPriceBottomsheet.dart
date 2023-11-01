@@ -117,7 +117,7 @@ class _ShowPriceBottomSheetState extends State<ShowPriceBottomSheet> {
                       Container(
                         padding: const EdgeInsets.only(left: 15, right: 20),
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             TextButton(
                                 onPressed: () {},
@@ -138,7 +138,7 @@ class _ShowPriceBottomSheetState extends State<ShowPriceBottomSheet> {
                                     borderRadius: BorderRadius.circular(15),
                                     color: FoodiesColors.accentColor),
                                 child: Text(
-                                  "Filter",
+                                  "Apply",
                                   style: TextStyle(
                                       color: FoodiesColors.cardColor,
                                       fontSize: 16.sp,

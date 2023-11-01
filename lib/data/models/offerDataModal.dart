@@ -1,48 +1,48 @@
-class CategoryDataModals {
-  List<Category>? category;
+class OfferDataModal {
+  List<Offer>? offer;
 
-  CategoryDataModals({this.category});
+  OfferDataModal({this.offer});
 
-  CategoryDataModals.fromJson(Map<String, dynamic> json) {
-    if (json['category'] != null) {
-      category = <Category>[];
-      json['category'].forEach((v) {
-        category!.add(new Category.fromJson(v));
+  OfferDataModal.fromJson(Map<String, dynamic> json) {
+    if (json['Offer'] != null) {
+      offer = <Offer>[];
+      json['Offer'].forEach((v) {
+        offer!.add(new Offer.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.category != null) {
-      data['category'] = this.category!.map((v) => v.toJson()).toList();
+    if (this.offer != null) {
+      data['Offer'] = this.offer!.map((v) => v.toJson()).toList();
     }
     return data;
   }
 }
 
-class Category {
+class Offer {
   String? sId;
-  String? categoryName;
-  String? type;
+  String? title;
+  String? percent;
   String? image;
   String? createdAt;
   String? updatedAt;
   int? iV;
 
-  Category(
+  Offer(
       {this.sId,
-      this.categoryName,
-      this.type,
+      this.title,
+      this.percent,
       this.image,
       this.createdAt,
       this.updatedAt,
       this.iV});
 
-  Category.fromJson(Map<String, dynamic> json) {
+  Offer.fromJson(Map<String, dynamic> json) {
     sId = json['_id'];
-    categoryName = json['categoryName'];
-    type = json['type'];
+    title = json['title'];
+    percent = json['percent'];
     image = json['image'];
     createdAt = json['createdAt'];
     updatedAt = json['updatedAt'];
@@ -52,8 +52,8 @@ class Category {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['_id'] = this.sId;
-    data['categoryName'] = this.categoryName;
-    data['type'] = this.type;
+    data['title'] = this.title;
+    data['percent'] = this.percent;
     data['image'] = this.image;
     data['createdAt'] = this.createdAt;
     data['updatedAt'] = this.updatedAt;

@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:foodies_app/constants/appTextStyles.dart';
 import 'package:foodies_app/constants/assets.dart';
 import 'package:foodies_app/constants/colors.dart';
-import 'package:foodies_app/controllers/addProductOnListCart.dart';
 import 'package:foodies_app/controllers/favController.dart';
 import 'package:get/get.dart';
 

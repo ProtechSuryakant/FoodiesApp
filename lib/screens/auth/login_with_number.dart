@@ -2,7 +2,6 @@ import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:foodies_app/app/routes/routes.dart';
 import 'package:foodies_app/constants/appFonts.dart';
 import 'package:foodies_app/constants/appMessages.dart';
@@ -10,10 +9,9 @@ import 'package:foodies_app/constants/assets.dart';
 import 'package:foodies_app/constants/colors.dart';
 import 'package:foodies_app/constants/fontSizes.dart';
 import 'package:foodies_app/constants/msgTitle.dart';
-import 'package:foodies_app/main.dart';
+import 'package:foodies_app/controllers/login_controller.dart';
 import 'package:get/get.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
-import 'package:intl_phone_field/phone_number.dart';
 
 class LoginWithNumber extends StatefulWidget {
   const LoginWithNumber({super.key});
@@ -24,6 +22,8 @@ class LoginWithNumber extends StatefulWidget {
 
 class _LoginWithNumberState extends State<LoginWithNumber> {
   final _mobileNumber = TextEditingController();
+
+  LoginController _loginController = Get.put(LoginController());
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +39,7 @@ class _LoginWithNumberState extends State<LoginWithNumber> {
             padding: EdgeInsets.symmetric(horizontal: 10.w),
             child: TextButton(
               onPressed: () {
-                Get.toNamed(AppRoutes.homeMain);
+                Get.offNamed(AppRoutes.homeMain);
               },
               child: Text(
                 "Skip",
@@ -183,22 +183,9 @@ class _LoginWithNumberState extends State<LoginWithNumber> {
                       const TextStyle(fontSize: FontSize.smallBodyText),
                 ).show();
               } else {
-                AwesomeDialog(
-                  context: context,
-                  animType: AnimType.topSlide,
-                  dialogType: DialogType.success,
-                  title: MsgTitle.Success,
-                  desc: AppMessages.success,
-                  btnOkColor: FoodiesColors.accentColor,
-                  btnOkOnPress: () {
-                    Get.back();
-                  },
-                  descTextStyle:
-                      const TextStyle(fontSize: FontSize.smallBodyText),
-                ).show();
-                box.write('isLogged', true);
-                print(box.read('isLogged'));
-                Get.offNamed(AppRoutes.otpVerification);
+                _loginController.loginWithMobileNumber(
+                    _mobileNumber.text, context);
+                // Get.offAndToNamed(AppRoutes.otpVerification);
               }
             },
             child: Container(

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:foodies_app/app/routes/routes.dart';
-import 'package:foodies_app/constants/assets.dart';
+import 'package:foodies_app/controllers/getCategoryController.dart';
+import 'package:foodies_app/data/models/allFood.dart';
 import 'package:foodies_app/utils/poductCard.dart';
 import 'package:get/get.dart';
 
@@ -13,6 +13,14 @@ class ProductList extends StatefulWidget {
 }
 
 class _ProductListState extends State<ProductList> {
+  GetCategoryController _categoryController = Get.put(GetCategoryController());
+
+  @override
+  void initState() {
+    _categoryController.fetchCategories(context);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SliverList(
@@ -22,18 +30,18 @@ class _ProductListState extends State<ProductList> {
             padding: EdgeInsets.all(15.0.r),
             child: ProductCard(
               favIcon: Icons.favorite,
-              productTitle: "Margarita Pizza",
-              image: AppAssets.Jalapeno_pizza_1,
-              price: 259,
+              productTitle: allFodData[index].foodTitle,
+              image: allFodData[index].images,
+              price: allFodData[index].price,
               productDesc:
                   "Margherita Pizza features a thin crust topped with three basic ingredients: fresh tomato sauce, mozzarella cheese, and fresh basil leaves.",
-              rating: 3.5,
+              rating: allFodData[index].ratings,
               disLike: Icons.favorite_border_outlined,
-              index: index + 1,
+              index: index,
             ),
           );
         },
-        childCount: 10,
+        childCount: allFodData.length,
       ),
     );
   }

@@ -11,6 +11,7 @@ import 'package:foodies_app/constants/assets.dart';
 import 'package:foodies_app/constants/colors.dart';
 import 'package:foodies_app/constants/fontSizes.dart';
 import 'package:foodies_app/constants/msgTitle.dart';
+import 'package:foodies_app/controllers/otpVerificationController.dart';
 import 'package:get/get.dart';
 
 class OTPVerification extends StatefulWidget {
@@ -25,18 +26,23 @@ class _OTPVerificationState extends State<OTPVerification> {
   FocusNode secondDigitFocusNode = FocusNode();
   FocusNode thirdDigitFocusNode = FocusNode();
   FocusNode fourthDigitFocusNode = FocusNode();
-  // FocusNode fifthDigitFocusNode = FocusNode();
-  // FocusNode sixthDigitFocusNode = FocusNode();
+  FocusNode fifthDigitFocusNode = FocusNode();
+  FocusNode sixthDigitFocusNode = FocusNode();
 
   final TextEditingController _otpController1 = TextEditingController();
   final TextEditingController _otpController2 = TextEditingController();
   final TextEditingController _otpController3 = TextEditingController();
   final TextEditingController _otpController4 = TextEditingController();
-  // final TextEditingController _otpController5 = TextEditingController();
-  // final TextEditingController _otpController6 = TextEditingController();
+  final TextEditingController _otpController5 = TextEditingController();
+  final TextEditingController _otpController6 = TextEditingController();
+
+  final OTPVerifyController _otpVerification = Get.put(OTPVerifyController());
+  final mobileNumber = Get.arguments['number'] as String;
+  final otp = Get.arguments['otp'] as String;
 
   @override
   Widget build(BuildContext context) {
+    print("args $mobileNumber");
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;
 
@@ -70,51 +76,55 @@ class _OTPVerificationState extends State<OTPVerification> {
                 color: FoodiesColors.cardColor.withOpacity(0.8),
                 borderRadius: BorderRadius.circular(50),
               ),
-              child: Row(
-                children: [
-                  Text(
-                    "Verification Code",
-                    style: TextStyle(
-                        // color: FoodiesColors.accentColor,
+              child: Text(
+                "Verification Code",
+                style: TextStyle(
+                    // color: FoodiesColors.accentColor,
 
-                        fontWeight: FontWeight.bold,
-                        fontSize: h * 0.028),
-                  ),
-                ],
+                    fontWeight: FontWeight.bold,
+                    fontSize: h * 0.028),
               ),
             ),
           ),
           Positioned(
-            left: 20,
-            right: 20,
+            left: 10.w,
+            right: 10.w,
             top: 350.h,
             child: Container(
               alignment: Alignment.center,
               child: Column(
                 children: [
-                  Text(
-                    "Please enter  OTP sent to your mobile number.",
+                  const Text(
+                    "Please enter the OTP that has been sent to your mobile number.",
                     style: TextStyle(fontSize: FontSize.smallBodyText),
                   ),
                   SizedBox(
-                    height: 10.h,
+                    height: 20.h,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       buildOTPTextField(_otpController1),
                       SizedBox(
-                        width: w * 0.05.h,
+                        width: 10.w,
                       ),
                       buildOTPTextField(_otpController2),
                       SizedBox(
-                        width: w * 0.05.h,
+                        width: 10.w,
                       ),
                       buildOTPTextField(_otpController3),
                       SizedBox(
-                        width: w * 0.05.h,
+                        width: 10.w,
                       ),
                       buildOTPTextField(_otpController4),
+                      SizedBox(
+                        width: 10.w,
+                      ),
+                      buildOTPTextField(_otpController5),
+                      SizedBox(
+                        width: 10.w,
+                      ),
+                      buildOTPTextField(_otpController6),
                     ],
                   ),
                 ],
@@ -122,15 +132,17 @@ class _OTPVerificationState extends State<OTPVerification> {
             ),
           ),
           Positioned(
-            top: 470.h,
-            left: 30.h,
-            right: 30.h,
+            top: 500.h,
+            left: 10.w,
+            right: 10.w,
             child: InkWell(
               onTap: () {
                 if (_otpController1.text.isEmpty ||
                     _otpController2.text.isEmpty ||
                     _otpController3.text.isEmpty ||
-                    _otpController4.text.isEmpty) {
+                    _otpController4.text.isEmpty ||
+                    _otpController5.text.isEmpty ||
+                    _otpController6.text.isEmpty) {
                   AwesomeDialog(
                           context: context,
                           dialogType: DialogType.info,
@@ -148,20 +160,16 @@ class _OTPVerificationState extends State<OTPVerification> {
                           btnOkColor: Colors.pink)
                       .show();
                 } else {
-                  AwesomeDialog(
-                          context: context,
-                          animType: AnimType.topSlide,
-                          dialogType: DialogType.success,
-                          title: MsgTitle.Success,
-                          descTextStyle:
-                              const TextStyle(fontSize: FontSize.smallBodyText),
-                          isDense: false,
-                          btnOkText: 'OK',
-                          btnOkOnPress: () {
-                            Get.offAndToNamed(AppRoutes.homeMain);
-                          },
-                          btnOkColor: FoodiesColors.accentColor)
-                      .show();
+                  _otpVerification.verifyWithOTP(
+                      mobileNumber,
+                      _otpController1.text,
+                      _otpController2.text,
+                      _otpController3.text,
+                      _otpController4.text,
+                      _otpController5.text,
+                      _otpController6.text,
+                      context);
+                  // Get.offAndToNamed(AppRoutes.homeMain);
                 }
               },
               child: Container(
@@ -181,7 +189,12 @@ class _OTPVerificationState extends State<OTPVerification> {
                 ),
               ),
             ),
-          )
+          ),
+          Positioned(
+              left: 100.w,
+              right: 50.w,
+              top: 650.h,
+              child: Text("Inter Demo OTP: $otp"))
         ],
       ),
     );

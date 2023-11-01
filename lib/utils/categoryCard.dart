@@ -14,10 +14,26 @@ class CategoryCard extends StatelessWidget {
       alignment: Alignment.center,
       padding: EdgeInsets.only(top: 10.h),
       child: Column(children: [
+        // SizedBox(
+        //   height: 60.h,
+        //   width: 60.w,
+        //   child: Image.network(
+        //     "$image",
+        //     errorBuilder: (context, error, stackTrace) {
+        //       return Text('Image Not Found');
+        //     },
+        //   ),
+        // ),
         SizedBox(
           height: 60.h,
           width: 60.w,
-          child: Image.asset(image),
+          child: const CircleAvatar(
+            backgroundColor: FoodiesColors.accentColor,
+            child: Icon(
+              Icons.close,
+              color: Colors.white,
+            ),
+          ),
         ),
         Text(
           catTitle,

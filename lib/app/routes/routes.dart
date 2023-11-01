@@ -22,4 +22,5 @@ class AppRoutes {
   static const settings = '/settings';
   static const supportUs = '/supportus';
   static const foodDetails = '/foodDetails';
+  static const themeChange = '/themeChange';
 }

@@ -154,33 +154,37 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ],
                   ),
                 ),
-                Container(
-                  padding: EdgeInsetsDirectional.symmetric(
-                      horizontal: 15.r, vertical: 10.r),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.r),
-                      color: FoodiesColors.cardColor,
-                      boxShadow: [
-                        BoxShadow(
-                            blurRadius: 0.2,
-                            spreadRadius: 0.2,
-                            color: Colors.black.withOpacity(0.3),
-                            offset: const Offset(0, 0.5))
-                      ]),
-                  child: Column(
-                    children: [
-                      const Icon(
-                        Icons.settings,
-                        size: 30,
-                      ),
-                      Text(
-                        "Settings",
-                        style: TextStyle(
-                            fontSize: 16.sp,
-                            fontFamily: 'Inter',
-                            fontWeight: FontWeight.w500),
-                      )
-                    ],
+                InkWell(
+                  onTap: () => Get.toNamed(AppRoutes.themeChange),
+                  child: Container(
+                    padding: EdgeInsetsDirectional.symmetric(
+                        horizontal: 15.r, vertical: 10.r),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10.r),
+                        color: FoodiesColors.cardColor,
+                        boxShadow: [
+                          BoxShadow(
+                              blurRadius: 0.2,
+                              spreadRadius: 0.2,
+                              color: Colors.black.withOpacity(0.3),
+                              offset: const Offset(0, 0.5))
+                        ]),
+                    child: Column(
+                      children: [
+                        Image.asset(
+                          "assets/png/theme.png",
+                          height: 30.h,
+                          width: 30.w,
+                        ),
+                        Text(
+                          "Theme",
+                          style: TextStyle(
+                              fontSize: 16.sp,
+                              fontFamily: 'Inter',
+                              fontWeight: FontWeight.w500),
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ],
