@@ -29,7 +29,7 @@ class _ThemeChangeButtonState extends State<ThemeChangeButton> {
         ),
         centerTitle: true,
       ),
-      body: Column(
+      body: Obx(() => Column(
         children: [
           RadioListTile.adaptive(
             title: Text(
@@ -38,7 +38,10 @@ class _ThemeChangeButtonState extends State<ThemeChangeButton> {
             ),
             value: ThemeMode.light,
             groupValue: _themeControllers.themeMode,
-            onChanged: _themeControllers.setTheme,
+            onChanged: (value) {
+              print(value);
+              _themeControllers.setTheme(ThemeMode.light);
+            },
             activeColor: FoodiesColors.accentColor,
           ),
           RadioListTile.adaptive(
@@ -48,7 +51,10 @@ class _ThemeChangeButtonState extends State<ThemeChangeButton> {
             ),
             value: ThemeMode.dark,
             groupValue: _themeControllers.themeMode,
-            onChanged: _themeControllers.setTheme,
+            onChanged: (value) {
+              print(value);
+              _themeControllers.setTheme(ThemeMode.dark);
+            },
             activeColor: FoodiesColors.accentColor,
           ),
           RadioListTile.adaptive(
@@ -58,11 +64,14 @@ class _ThemeChangeButtonState extends State<ThemeChangeButton> {
             ),
             value: ThemeMode.system,
             groupValue: _themeControllers.themeMode,
-            onChanged: _themeControllers.setTheme,
+            onChanged: (value) {
+              print(value);
+              _themeControllers.setTheme(ThemeMode.system);
+            },
             activeColor: FoodiesColors.accentColor,
           )
         ],
-      ),
+      )),
     );
   }
 }

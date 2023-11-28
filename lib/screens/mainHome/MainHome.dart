@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:foodies_app/constants/appTextStyles.dart';
 import 'package:foodies_app/constants/colors.dart';
 import 'package:foodies_app/constants/fontSizes.dart';
+import 'package:foodies_app/controllers/permmision_controllers.dart';
 import 'package:foodies_app/screens/mainHome/cart/cartScreen.dart';
 import 'package:foodies_app/screens/mainHome/home/Home.dart';
 import 'package:foodies_app/screens/mainHome/newsBlog/newsandblog.dart';
@@ -26,6 +27,17 @@ class _MainHomeState extends State<MainHome> {
     const CartScreen(),
     const NewsAndBlog()
   ];
+
+  PermissionController _permissionController = Get.put(PermissionController());
+
+  @override
+  void initState()  {
+    _permissionController.checkCameraPermission();
+    if(_permissionController.cameraPermissionGranted()==false){
+      _permissionController.requestCameraPermission();
+    }
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

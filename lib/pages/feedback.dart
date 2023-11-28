@@ -48,6 +48,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
             ),
             child: TextFormField(
               decoration: const InputDecoration(
+
                   hintText: "Feedback title", border: InputBorder.none),
             ),
           ),

@@ -69,7 +69,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           backgroundColor: FoodiesColors.cardBackground,
                           radius: 15,
                           child: IconButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                selectSourceDialog(context);
+                              },
                               icon: const Icon(
                                 Icons.add,
                                 size: 15,
@@ -450,4 +452,40 @@ class _ProfileScreenState extends State<ProfileScreen> {
       ),
     );
   }
+
+  void selectSourceDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(16.0)),
+          ),
+          title: Text('Select Image Source'),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).pop(); // Close the dialog
+                  // Add your camera handling logic here
+                },
+                child: Text('Camera'),
+              ),
+              SizedBox(height: 8.0),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).pop(); // Close the dialog
+                  // Add your gallery handling logic here
+                },
+                child: Text('Gallery'),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
 }
+
+

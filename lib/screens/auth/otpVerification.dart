@@ -56,10 +56,10 @@ class _OTPVerificationState extends State<OTPVerification> {
             child: Container(
                 height: h * 0.4,
                 width: w,
-                decoration: const BoxDecoration(
+                decoration:  BoxDecoration(
                   borderRadius:
-                      BorderRadius.only(bottomRight: Radius.circular(50)),
-                  image: DecorationImage(
+                      BorderRadius.only(bottomRight: Radius.circular(20.r),bottomLeft: Radius.circular(20.r)),
+                  image: const DecorationImage(
                       image: AssetImage(AppAssets.loginBurger),
                       fit: BoxFit.cover),
                 )),
@@ -73,14 +73,13 @@ class _OTPVerificationState extends State<OTPVerification> {
               width: w,
               alignment: Alignment.center,
               decoration: BoxDecoration(
-                color: FoodiesColors.cardColor.withOpacity(0.8),
-                borderRadius: BorderRadius.circular(50),
+                color: FoodiesColors.cardColor,
+                borderRadius: BorderRadius.circular(16.0),
               ),
               child: Text(
                 "Verification Code",
                 style: TextStyle(
                     // color: FoodiesColors.accentColor,
-
                     fontWeight: FontWeight.bold,
                     fontSize: h * 0.028),
               ),
@@ -203,7 +202,8 @@ class _OTPVerificationState extends State<OTPVerification> {
   Widget buildOTPTextField(TextEditingController controller) {
     return Container(
       color: FoodiesColors.cardColor,
-      width: 50.0.h,
+      width: 50.0.w,
+      alignment: Alignment.center,
       child: TextFormField(
         textAlign: TextAlign.center,
         style: const TextStyle(

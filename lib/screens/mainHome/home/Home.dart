@@ -12,9 +12,7 @@ import 'package:foodies_app/controllers/offerListController.dart';
 import 'package:foodies_app/controllers/orderQntyBtn.dart';
 import 'package:foodies_app/controllers/productAddButton.dart';
 import 'package:foodies_app/controllers/timePickerController.dart';
-import 'package:foodies_app/data/models/offerDataModal.dart';
 import 'package:foodies_app/skeleton/homeSkaleton.dart';
-
 import 'package:foodies_app/widgtes/categoryList.dart';
 import 'package:foodies_app/widgtes/categoryList2.dart';
 import 'package:foodies_app/widgtes/menuCardLists.dart';
@@ -713,24 +711,27 @@ class _HomeState extends State<Home> {
                                     ))
                               ],
                             )),
-                        Container(
-                            alignment: Alignment.center,
-                            width: w.w,
-                            margin: EdgeInsets.symmetric(
-                                horizontal: 10.w, vertical: 10.h),
-                            padding: EdgeInsets.only(
-                                left: 10.w, top: 10.h, bottom: 10.h),
-                            decoration: BoxDecoration(
-                                color: FoodiesColors.accentColor,
-                                borderRadius: BorderRadius.circular(10.r)),
-                            child: Text(
-                              "Book",
-                              style: TextStyle(
-                                  fontFamily: 'Inter',
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: h * 0.022.sp,
-                                  color: Colors.white),
-                            ))
+                        InkWell(
+                          onTap: ()=>Get.back(),
+                          child: Container(
+                              alignment: Alignment.center,
+                              width: w.w,
+                              margin: EdgeInsets.symmetric(
+                                  horizontal: 10.w, vertical: 10.h),
+                              padding: EdgeInsets.only(
+                                  left: 10.w, top: 10.h, bottom: 10.h),
+                              decoration: BoxDecoration(
+                                  color: FoodiesColors.accentColor,
+                                  borderRadius: BorderRadius.circular(10.r)),
+                              child: Text(
+                                "Book",
+                                style: TextStyle(
+                                    fontFamily: 'Inter',
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: h * 0.022.sp,
+                                    color: Colors.white),
+                              )),
+                        )
                       ],
                     ),
                   ),

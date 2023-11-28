@@ -8,25 +8,59 @@ class ShortCheckboxController extends GetxController {
   RxBool costLH = false.obs;
   RxBool costHL = false.obs;
 
+  void clearToggle(){
+    isRatingHL.value = !isRatingHL.value;
+    isRating.value = !isRating.value;
+    isDeliveryTimeLowToHigh.value = !isDeliveryTimeLowToHigh.value;
+    isDeliveryTimeHighToLow.value = !isDeliveryTimeHighToLow.value;
+    costLH.value = !costLH.value;
+    costHL.value = !costHL.value;
+  }
+
   void toggleCheckbox(String checkboxName) {
     switch (checkboxName) {
       case 'isRatingHL':
-        isRatingHL.value = !isRatingHL.value;
+        if(isRating.value){
+          isRatingHL.value = isRatingHL.value;
+        }else{
+          isRatingHL.value = !isRatingHL.value;
+        }
         break;
       case 'isRating':
-        isRating.value = !isRating.value;
+        if(isRatingHL.value){
+          isRating.value = isRating.value;
+        }else{
+          isRating.value = !isRating.value;
+        }
         break;
       case 'isDeliveryTimeLowToHigh':
-        isDeliveryTimeLowToHigh.value = !isDeliveryTimeLowToHigh.value;
+        if(isDeliveryTimeHighToLow.value){
+          isDeliveryTimeLowToHigh.value = isDeliveryTimeLowToHigh.value;
+        }else{
+          isDeliveryTimeLowToHigh.value = !isDeliveryTimeLowToHigh.value;
+        }
+
         break;
       case 'isDeliveryTimeHighToLow':
-        isDeliveryTimeHighToLow.value = !isDeliveryTimeHighToLow.value;
+        if(isDeliveryTimeLowToHigh.value){
+          isDeliveryTimeHighToLow.value = isDeliveryTimeHighToLow.value;
+        }else{
+          isDeliveryTimeHighToLow.value = !isDeliveryTimeHighToLow.value;
+        }
         break;
       case 'costLH':
-        costLH.value = !costLH.value;
+        if(costHL.value){
+          costLH.value = costLH.value;
+        }else{
+          costLH.value = !costLH.value;
+        }
         break;
       case 'costHL':
-        costHL.value = !costHL.value;
+        if(costLH.value){
+          costHL.value = costHL.value;
+        }else {
+          costHL.value = !costHL.value;
+        }
         break;
       default:
         break;

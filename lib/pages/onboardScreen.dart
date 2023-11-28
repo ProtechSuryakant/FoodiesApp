@@ -106,6 +106,7 @@ class _OnBoardScreenState extends State<OnBoardScreen> {
                       child: Obx(() => Text(
                             btnTitle.value,
                             style: TextStyle(
+                              color: Colors.white,
                               fontSize: 22.sp,
                               fontFamily: 'Inter',
                               fontWeight: FontWeight.bold,

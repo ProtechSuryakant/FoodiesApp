@@ -30,7 +30,7 @@ class _CategoryListState extends State<CategoryList> {
               scrollDirection: Axis.horizontal,
               itemCount: _categoryController.allCategoryData.length,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisSpacing: 0.3,
+                  crossAxisSpacing: w * 0.02.w,
                   mainAxisSpacing: 2,
                   crossAxisCount:
                       _categoryController.allCategoryData.length < 8 ? 1 : 2,

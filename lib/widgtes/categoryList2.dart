@@ -122,6 +122,7 @@ class _CategoryListState extends State<CategoryList2> {
                                               ),
                                               Obx(() => Checkbox(
                                                     checkColor: Colors.white,
+                                                    activeColor: FoodiesColors.accentColor,
                                                     value: checkboxController
                                                         .isRatingHL.value,
                                                     onChanged: (bool? value) {
@@ -147,6 +148,7 @@ class _CategoryListState extends State<CategoryList2> {
                                               ),
                                               Obx(() => Checkbox(
                                                     checkColor: Colors.white,
+                                                activeColor: FoodiesColors.accentColor,
                                                     value: checkboxController
                                                         .isRating.value,
                                                     onChanged: (bool? value) {
@@ -171,6 +173,7 @@ class _CategoryListState extends State<CategoryList2> {
                                                 style: AppTextStyles.titleStyle,
                                               ),
                                               Obx(() => Checkbox(
+                                                activeColor: FoodiesColors.accentColor,
                                                     checkColor: Colors.white,
                                                     value: checkboxController
                                                         .isDeliveryTimeLowToHigh
@@ -197,6 +200,7 @@ class _CategoryListState extends State<CategoryList2> {
                                                 style: AppTextStyles.titleStyle,
                                               ),
                                               Obx(() => Checkbox(
+                                                activeColor: FoodiesColors.accentColor,
                                                     checkColor: Colors.white,
                                                     value: checkboxController
                                                         .isDeliveryTimeHighToLow
@@ -223,6 +227,7 @@ class _CategoryListState extends State<CategoryList2> {
                                                 style: AppTextStyles.titleStyle,
                                               ),
                                               Obx(() => Checkbox(
+                                                activeColor: FoodiesColors.accentColor,
                                                     checkColor: Colors.white,
                                                     value: checkboxController
                                                         .costLH.value,
@@ -248,6 +253,7 @@ class _CategoryListState extends State<CategoryList2> {
                                                 style: AppTextStyles.titleStyle,
                                               ),
                                               Obx(() => Checkbox(
+                                                activeColor: FoodiesColors.accentColor,
                                                     checkColor: Colors.white,
                                                     value: checkboxController
                                                         .costHL.value,
@@ -274,7 +280,9 @@ class _CategoryListState extends State<CategoryList2> {
                                                 MainAxisAlignment.spaceBetween,
                                             children: [
                                               TextButton(
-                                                  onPressed: () {},
+                                                  onPressed: () {
+                                                    checkboxController.clearToggle();
+                                                  },
                                                   child: Text(
                                                     "Clear All",
                                                     style: TextStyle(
